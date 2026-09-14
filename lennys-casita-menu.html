@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu — Lenny's Casita</title>
+  <meta name="description" content="The Lenny's Casita menu: tapas, street tacos, boards, the grill, burgers, soups and salads, cocktails by Cesar Mateo, happy hour and Shabbat Shuk. Glatt kosher under OK supervision, 8823 W Pico Blvd, Los Angeles." />
+  <meta name="theme-color" content="#0d3b26" />
+  <link rel="icon" href="./assets/images/branding/logo-white.png" />
+  <link rel="preload" as="image" href="assets/images/food/menu-hero.webp" type="image/webp" fetchpriority="high" />
+  <script>
+    document.documentElement.classList.add("js");
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
+  </script>
+  <script type="module" src="./assets/js/menu.js"></script>
+  <link rel="modulepreload" href="./assets/js/vendor.js">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/menu.css">
+</head>
+<body class="page-menu">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" data-nav>
+    <div class="nav__inner">
+      <span class="nav__glass glass glass-edge" aria-hidden="true"></span>
+      <a class="nav__logo" href="index.html" aria-label="Lenny's Casita home">
+        <img src="assets/images/branding/logo-white.png" width="184" height="120" alt="" />
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <div class="dd" data-dd>
+          <button class="dd__trigger" type="button" aria-expanded="false" aria-controls="dd-eat">Eat &amp; drink <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9L12 15L5 9"/></svg></span></button>
+          <div class="dd__panel glass glass-edge" id="dd-eat">
+            <div>
+              <p class="dd__label">On this menu</p>
+              <ul class="dd__list">
+                <li><a href="#tapas">Food, from tapas to sides</a></li>
+                <li><a href="#drinks">Cocktails &amp; the bar</a></li>
+                <li><a href="#happy-hour">Happy hour</a></li>
+                <li><a href="#shabbat">Shabbat Shuk, Friday menu</a></li>
+                <li><a href="https://www.orderlennyscasita.com/#most-popular">Order pickup &amp; delivery <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a></li>
+              </ul>
+            </div>
+            <a class="dd__feature" href="#drinks">
+              <img src="assets/images/cocktails/mangorita.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <span>Cocktails by Cesar Mateo</span>
+            </a>
+          </div>
+        </div>
+        <div class="dd" data-dd>
+          <button class="dd__trigger" type="button" aria-expanded="false" aria-controls="dd-casita">The Casita <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9L12 15L5 9"/></svg></span></button>
+          <div class="dd__panel glass glass-edge" id="dd-casita">
+            <div>
+              <p class="dd__label">Inside</p>
+              <ul class="dd__list">
+                <li><a href="index.html#film">A night at the Casita</a></li>
+                <li><a href="index.html#story">Chef Lenny's story</a></li>
+                <li><a href="index.html#after-dark">After dark</a></li>
+                <li><a href="index.html#visit">Visit &amp; hours</a></li>
+              </ul>
+            </div>
+            <a class="dd__feature" href="index.html#film">
+              <img src="assets/images/hero/beat-1.webp" width="426" height="240" alt="" loading="lazy" decoding="async" />
+              <span>Watch a night on Pico</span>
+            </a>
+          </div>
+        </div>
+        <div class="dd" data-dd>
+          <button class="dd__trigger" type="button" aria-expanded="false" aria-controls="dd-celebrate">Celebrate <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9L12 15L5 9"/></svg></span></button>
+          <div class="dd__panel glass glass-edge" id="dd-celebrate">
+            <div>
+              <p class="dd__label">Bring everyone</p>
+              <ul class="dd__list">
+                <li><a href="index.html#celebrate">Catering &amp; events</a></li>
+                <li><a href="https://www.culturabylenny.com/">Cultura by Lenny <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a></li>
+                <li><a href="https://app.squareup.com/gift/MLKNRF2430JYZ/order">E-gift card <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a></li>
+                <li><a href="https://theplaya.shop/collections/lennys-casita">Merch <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a></li>
+              </ul>
+            </div>
+            <a class="dd__feature" href="index.html#celebrate">
+              <img src="assets/images/hero/beat-2.webp" width="426" height="240" alt="" loading="lazy" decoding="async" />
+              <span>Birthdays, Kiddush and big nights</span>
+            </a>
+          </div>
+        </div>
+        <a href="index.html#visit">Visit</a>
+      </nav>
+      <div class="nav__end">
+        <p class="status" data-status aria-live="polite">
+          <span class="status__dot" aria-hidden="true"></span>
+          <span data-status-text>Hours on Pico</span>
+        </p>
+        <a class="btn btn--ghost-light btn--sm nav__order" href="https://www.orderlennyscasita.com/#most-popular">Order</a>
+        <a class="btn btn--onion btn--sm" href="https://www.opentable.com/restref/client/?restref=1266316&amp;lang=en-US&amp;ot_source=Restaurant%20website">Reserve</a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="drawer" data-drawer-toggle>
+          <span class="visually-hidden" data-drawer-label>Open menu</span>
+          <span class="nav__toggle-bars" aria-hidden="true"><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" data-drawer data-lenis-prevent hidden>
+    <nav class="drawer__links" aria-label="Mobile">
+      <div class="drawer__group">
+        <p class="drawer__label">On this menu</p>
+        <a href="#tapas">Food</a>
+        <a href="#drinks">Cocktails &amp; bar</a>
+        <a href="#happy-hour">Happy hour</a>
+        <a href="#shabbat">Shabbat Shuk</a>
+      </div>
+      <div class="drawer__group">
+        <p class="drawer__label">The Casita</p>
+        <a href="index.html">Home &amp; the film</a>
+        <a href="index.html#story">Our story</a>
+        <a href="index.html#visit">Visit &amp; hours</a>
+      </div>
+      <div class="drawer__group">
+        <p class="drawer__label">Celebrate</p>
+        <a href="index.html#celebrate">Catering &amp; events</a>
+        <a href="https://app.squareup.com/gift/MLKNRF2430JYZ/order">E-gift card</a>
+      </div>
+    </nav>
+    <p class="drawer__meta">8823 W Pico Blvd · <a href="tel:+13236775597">(323) 677-5597</a></p>
+  </div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero hero--menu" id="top" data-hero aria-labelledby="hero-title">
+      <div class="hero__panel">
+        <p class="hero__kicker">The menu · Glatt kosher under OK supervision</p>
+        <h1 class="hero__title" id="hero-title">
+          <span class="hero__line" data-split>Mexicali street</span>
+          <span class="hero__line" data-split>food, with an</span>
+          <span class="hero__line" data-split>Israeli accent.</span>
+        </h1>
+        <p class="hero__lede">Tacos and tahina, birria and amba, tequila and arak. Scroll the whole menu chapter by chapter, from the first chip to the last round.</p>
+        <div class="hero__actions">
+          <a class="btn btn--onion" href="https://www.orderlennyscasita.com/#most-popular">Order pickup &amp; delivery <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a>
+          <a class="btn btn--ghost-light" href="#tapas">Start with tapas <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4L12 20M6 14L12 20L18 14"/></svg></span></a>
+        </div>
+      </div>
+      <div class="hero__stage" data-hero-stage>
+        <figure class="hero__photo" data-hero-photo>
+          <picture>
+            <source srcset="assets/images/food/menu-hero.webp" type="image/webp" />
+            <img src="assets/images/food/menu-hero.jpg" width="1365" height="2048" alt="A crisp tostada piled with slow-cooked meat, guacamole and fried onions on a steel plate in front of Lenny's green tile wall" fetchpriority="high" />
+          </picture>
+        </figure>
+        <p class="hero__word" data-hero-word aria-hidden="true">Menu</p>
+        <div class="hero__cutout" data-hero-cutout aria-hidden="true">
+          <picture>
+            <source srcset="assets/images/food/menu-hero-cutout.webp" type="image/webp" />
+            <img src="assets/images/food/menu-hero-cutout.png" width="1365" height="2048" alt="" decoding="async" />
+          </picture>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STRIP ============ -->
+    <div class="strip" data-strip>
+      <div class="strip__track">
+        <p class="strip__group"><span class="strip__item">Tapas</span><span class="strip__sep" aria-hidden="true"></span><span class="strip__item">Street tacos</span><span class="strip__sep" aria-hidden="true"></span><span class="strip__item">Boards for the table</span><span class="strip__sep" aria-hidden="true"></span><span class="strip__item">Birria ramen</span><span class="strip__sep" aria-hidden="true"></span><span class="strip__item">Cocktails by Cesar Mateo</span><span class="strip__sep" aria-hidden="true"></span><span class="strip__item">Happy hour</span><span class="strip__sep" aria-hidden="true"></span></p>
+        <p class="strip__group" aria-hidden="true"><span class="strip__item">Tapas</span><span class="strip__sep"></span><span class="strip__item">Street tacos</span><span class="strip__sep"></span><span class="strip__item">Boards for the table</span><span class="strip__sep"></span><span class="strip__item">Birria ramen</span><span class="strip__sep"></span><span class="strip__item">Cocktails by Cesar Mateo</span><span class="strip__sep"></span><span class="strip__item">Happy hour</span><span class="strip__sep"></span></p>
+      </div>
+    </div>
+
+    <!-- ============ FUSION STATEMENT ============ -->
+    <section class="fusion" aria-label="The idea behind the menu">
+      <p class="fusion__text" data-fusion>Salsa verde meets tahina. Birria meets ramen. Amba aioli meets a pretzel bun, and tequila pulls up a chair next to arak.</p>
+    </section>
+
+    <div class="chapters" data-chapters>
+      <!-- ============ CHAPTER RAIL ============ -->
+      <nav class="rail" aria-label="Menu chapters" data-rail>
+        <div class="rail__inner glass glass-edge">
+          <ol class="rail__list">
+            <li><a href="#tapas" data-rail-link><span class="rail__num">01</span><span class="rail__name">Tapas</span></a></li>
+            <li><a href="#tacos" data-rail-link><span class="rail__num">02</span><span class="rail__name">Street tacos</span></a></li>
+            <li><a href="#street-food" data-rail-link><span class="rail__num">03</span><span class="rail__name">Build a plate</span></a></li>
+            <li><a href="#boards" data-rail-link><span class="rail__num">04</span><span class="rail__name">Boards</span></a></li>
+            <li><a href="#mains" data-rail-link><span class="rail__num">05</span><span class="rail__name">From the grill</span></a></li>
+            <li><a href="#burgers" data-rail-link><span class="rail__num">06</span><span class="rail__name">Burgers</span></a></li>
+            <li><a href="#soups-salads" data-rail-link><span class="rail__num">07</span><span class="rail__name">Soups &amp; salads</span></a></li>
+            <li><a href="#sides" data-rail-link><span class="rail__num">08</span><span class="rail__name">Sides &amp; kids</span></a></li>
+            <li><a href="#drinks" data-rail-link><span class="rail__num">09</span><span class="rail__name">Drinks</span></a></li>
+            <li><a href="#happy-hour" data-rail-link><span class="rail__num">10</span><span class="rail__name">Happy hour</span></a></li>
+            <li><a href="#shabbat" data-rail-link><span class="rail__num">11</span><span class="rail__name">Shabbat</span></a></li>
+          </ol>
+          <span class="rail__progress" aria-hidden="true"><span></span></span>
+        </div>
+      </nav>
+
+      <!-- ============ 01 TAPAS ============ -->
+      <section class="chapter chapter--paper" id="tapas" aria-labelledby="tapas-title">
+        <div class="chapter__inner split">
+          <div>
+            <header class="chapter__head">
+              <p class="chapter__kicker"><span>01</span> Tapas</p>
+              <h2 class="chapter__title" id="tapas-title" data-split>Start with something to share.</h2>
+            </header>
+            <ul class="items" data-reveal-group>
+              <li class="item" id="casita-guacamole" data-reveal-item>
+                <div class="item__head"><p class="item__name">Casita guacamole &amp; chips</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>12</p></div>
+                <ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" id="chipotle-honey-wings" data-reveal-item>
+                <div class="item__head"><p class="item__name">Chipotle honey wings</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>23</p></div>
+                <p class="item__desc">Sesame seeds, pickled onion</p>
+              </li>
+              <li class="item" id="casita-cauliflower" data-reveal-item>
+                <div class="item__head"><p class="item__name">Casita cauliflower</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>25</p></div>
+                <p class="item__desc">Tahina, chimichurri, walnuts</p>
+                <ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li><li><abbr class="tag" title="Contains nuts">Nuts</abbr></li></ul>
+              </li>
+              <li class="item" id="pulled-brisket-fries" data-reveal-item>
+                <div class="item__head"><p class="item__name">Pulled brisket fries</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>28</p></div>
+                <p class="item__desc">Aioli, chimichurri, sumac onion</p>
+                <ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" data-reveal-item>
+                <div class="item__head"><p class="item__name">3 fried chicken tacos</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>28</p></div>
+                <p class="item__desc">Aioli, pico de gallo, pickled onion</p>
+              </li>
+              <li class="item" data-reveal-item>
+                <div class="item__head"><p class="item__name">Wagyu boneless spare ribs</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>24</p></div>
+                <p class="item__desc">In BBQ glaze</p>
+                <ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" id="short-rib-taquitos" data-reveal-item>
+                <div class="item__head"><p class="item__name">Short rib taquitos</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>19</p></div>
+                <ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" id="corn-ribs" data-reveal-item>
+                <div class="item__head"><p class="item__name">Corn ribs</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>22</p></div>
+                <ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" id="arayis" data-reveal-item>
+                <div class="item__head"><p class="item__name">Arayis</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>27</p></div>
+              </li>
+              <li class="item" id="flatbread" data-reveal-item>
+                <div class="item__head"><p class="item__name">Flatbread</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>25</p></div>
+                <p class="item__desc">Your choice of maple-lamb-bacon, crispy pastrami, pulled brisket, or mushroom truffle (V)</p>
+              </li>
+            </ul>
+          </div>
+          <figure class="split__media" data-image-reveal>
+            <picture><source srcset="assets/images/food/loaded-fries-720.webp 720w, assets/images/food/loaded-fries-1280.webp 1280w" sizes="(min-width: 900px) 38vw, 100vw" type="image/webp" /><img src="assets/images/food/loaded-fries-1280.jpg" width="1280" height="1919" alt="Fries under pulled brisket, chimichurri and pickled onion in a dark bowl on green tile" loading="lazy" decoding="async" /></picture>
+            <figcaption>Pictured: pulled brisket fries</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ 02 STREET TACOS ============ -->
+      <section class="chapter chapter--tile tacos" id="tacos" aria-labelledby="tacos-title" data-tacos>
+        <div class="tile-bg" aria-hidden="true"><img src="assets/images/backgrounds/tile-wall.webp" width="1600" height="1167" alt="" loading="lazy" decoding="async" /></div>
+        <div class="tacos__pin chapter__inner" data-tacos-pin>
+          <header class="chapter__head tacos__head">
+            <p class="chapter__kicker"><span>02</span> Street tacos</p>
+            <h2 class="chapter__title" id="tacos-title" data-split>Six tacos, sold one at a time.</h2>
+            <p class="chapter__note">Sold individually · add guac +3</p>
+          </header>
+          <div class="tacos__viewport" data-tacos-viewport>
+            <ol class="tacos__track" data-tacos-track>
+              <li class="taco glass glass-edge">
+                <p class="taco__num">01 / 06</p>
+                <p class="taco__name">Cachete</p>
+                <p class="taco__meaning">beef cheek</p>
+                <p class="taco__desc">Salsa verde, pickled cabbage, cilantro</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>10</p></div>
+              </li>
+              <li class="taco glass glass-edge">
+                <p class="taco__num">02 / 06</p>
+                <p class="taco__name">Carne asada</p>
+                <p class="taco__meaning">steak</p>
+                <p class="taco__desc">Onion, cilantro, pickled peppers, salsa verde</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>10</p></div>
+              </li>
+              <li class="taco glass glass-edge">
+                <p class="taco__num">03 / 06</p>
+                <p class="taco__name">Pulled brisket</p>
+                <p class="taco__meaning">beef</p>
+                <p class="taco__desc">Chimichurri, crispy onion, cilantro</p>
+                <div class="taco__foot"><span></span><p class="taco__price"><span class="visually-hidden">$</span>9</p></div>
+              </li>
+              <li class="taco glass glass-edge">
+                <p class="taco__num">04 / 06</p>
+                <p class="taco__name">Pollo</p>
+                <p class="taco__meaning">chicken</p>
+                <p class="taco__desc">Caramelized pineapple, avocado crema, cilantro</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>8</p></div>
+              </li>
+              <li class="taco glass glass-edge">
+                <p class="taco__num">05 / 06</p>
+                <p class="taco__name">Chorizo</p>
+                <p class="taco__meaning">sausage</p>
+                <p class="taco__desc">Avocado crema, pico de gallo, cilantro</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>8</p></div>
+              </li>
+              <li class="taco glass glass-edge">
+                <p class="taco__num">06 / 06</p>
+                <p class="taco__name">Veggie</p>
+                <p class="taco__meaning">grilled vegetables</p>
+                <p class="taco__desc">Grilled peppers and onions, black beans, chimichurri</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>6</p></div>
+              </li>
+              <li class="taco taco--three glass glass-edge">
+                <p class="taco__num">By the three</p>
+                <p class="taco__name">Quesabirria tacos (3)</p>
+                <p class="taco__desc">Three pulled brisket birria tacos with vegan cheese and birria jus for dipping</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>35</p></div>
+              </li>
+              <li class="taco taco--three taco--photo glass glass-edge" id="taco-combo">
+                <img src="assets/images/food/taco-board-720.webp" width="720" height="929" alt="Three tacos in steel holders with chips, rice and black beans on a wooden board" loading="lazy" decoding="async" />
+                <div class="taco__body">
+                  <p class="taco__num">By the three · pictured</p>
+                  <p class="taco__name">Taco combo (3)</p>
+                  <p class="taco__desc">Three tacos with your choice of proteins, served with rice, beans and tortilla chips</p>
+                  <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>35</p></div>
+                </div>
+              </li>
+              <li class="taco taco--three glass glass-edge">
+                <p class="taco__num">For the table</p>
+                <p class="taco__name">Deconstructed taco platter</p>
+                <p class="taco__desc">One protein with tortillas, black beans, Spanish rice and your choice of salsas. Makes up to 8 tacos.</p>
+                <div class="taco__foot"><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul><p class="taco__price"><span class="visually-hidden">$</span>65</p></div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 03 BUILD A PLATE ============ -->
+      <section class="chapter chapter--paper-2" id="street-food" aria-labelledby="street-title">
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>03</span> Mexicali street food</p>
+            <h2 class="chapter__title" id="street-title" data-split>Pick a protein. Pick how it's wrapped.</h2>
+            <p class="chapter__note">Each plate starts at its base price, plus the protein you choose.</p>
+          </header>
+          <div class="builder" data-builder>
+            <fieldset class="proteins">
+              <legend class="proteins__legend">Choose a protein</legend>
+              <label class="protein"><input type="radio" name="protein" value="cachete" data-label="cachete" data-add="10" data-taco="10" /><span class="protein__name">Cachete <em>beef cheek</em></span><span class="protein__add">+10</span></label>
+              <label class="protein"><input type="radio" name="protein" value="carne-asada" data-label="carne asada" data-add="10" data-taco="10" /><span class="protein__name">Carne asada <em>steak</em></span><span class="protein__add">+10</span></label>
+              <label class="protein"><input type="radio" name="protein" value="pulled-brisket" data-label="pulled brisket" data-add="9" data-taco="9" /><span class="protein__name">Pulled brisket <em>beef</em></span><span class="protein__add">+9</span></label>
+              <label class="protein"><input type="radio" name="protein" value="pollo" data-label="pollo" data-add="8" data-taco="8" /><span class="protein__name">Pollo <em>chicken</em></span><span class="protein__add">+8</span></label>
+              <label class="protein"><input type="radio" name="protein" value="chorizo" data-label="chorizo" data-add="8" data-taco="8" /><span class="protein__name">Chorizo <em>sausage</em></span><span class="protein__add">+8</span></label>
+              <label class="protein"><input type="radio" name="protein" value="veggie" data-label="veggie" data-add="0" data-taco="6" /><span class="protein__name">Veggie <em>grilled vegetables</em></span><span class="protein__add">+0</span></label>
+            </fieldset>
+            <div class="vessels">
+              <p class="builder__summary" data-builder-summary aria-live="polite">Base prices shown. Choose a protein to see the total.</p>
+              <article class="vessel" id="quesadilla" data-vessel data-name="Quesadilla" data-base="22">
+                <div class="item__head"><h3 class="item__name">Quesadilla</h3><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span><output data-price>22+</output></p></div>
+                <p class="item__desc">14" tortilla filled with vegan cheddar cheese, rice and beans, with your choice of protein. Chipotle aioli highly recommended here.</p>
+              </article>
+              <article class="vessel" id="crunchwrap" data-vessel data-name="Crunchwrap" data-base="24">
+                <div class="item__head"><h3 class="item__name">Crunchwrap</h3><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span><output data-price>24+</output></p></div>
+                <p class="item__desc">A crispy corn tostada filled with rice, beans, your protein and salsa, then wrapped and grilled in a flour tortilla.</p>
+              </article>
+              <article class="vessel" id="burrito" data-vessel data-name="Burrito" data-base="19">
+                <div class="item__head"><h3 class="item__name">Burrito</h3><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span><output data-price>19+</output></p></div>
+                <p class="item__desc">14" tortilla filled with black beans, Spanish rice, and your choice of protein or veggies. Also available as a gluten-free bowl.</p>
+              </article>
+              <article class="vessel" data-vessel data-name="Tostada bowl" data-base="22">
+                <div class="item__head"><h3 class="item__name">Tostada bowl</h3><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span><output data-price>22+</output></p></div>
+                <p class="item__desc">A homemade crispy flour tortilla shell with Spanish rice, black beans, shredded romaine, and your choice of protein and salsa.</p>
+              </article>
+              <article class="vessel" id="chalupas" data-vessel data-name="Chalupas (3)" data-mode="taco3">
+                <div class="item__head"><h3 class="item__name">Chalupas (3)</h3><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span><output data-price>taco × 3</output></p></div>
+                <p class="item__desc">Hard shell tacos filled with your protein, shredded lettuce, pico de gallo and chipotle aioli. Priced at three tacos.</p>
+                <ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </article>
+              <figure class="vessel__photo" data-image-reveal>
+                <picture><source srcset="assets/images/food/quesadilla-720.webp 720w, assets/images/food/quesadilla-1280.webp 1280w" sizes="(min-width: 900px) 30vw, 100vw" type="image/webp" /><img src="assets/images/food/quesadilla-1280.jpg" width="1280" height="1619" alt="Sliced quesadilla on a wooden board with guacamole and pico de gallo" loading="lazy" decoding="async" /></picture>
+                <figcaption>Pictured: quesadilla</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 04 BOARDS ============ -->
+      <section class="chapter chapter--paper" id="boards" aria-labelledby="boards-title">
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>04</span> Boards</p>
+            <h2 class="chapter__title" id="boards-title" data-split>For the whole table.</h2>
+          </header>
+          <div class="boards">
+            <article class="board board--feature">
+              <p class="board__serves"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="6" r="4"/><path stroke-linecap="round" d="M15 9C16.6569 9 18 7.65685 18 6C18 4.34315 16.6569 3 15 3"/><ellipse cx="9" cy="17" rx="7" ry="4"/><path stroke-linecap="round" d="M18 14C19.7542 14.3847 21 15.3589 21 16.5C21 17.5293 19.9863 18.4229 18.5 18.8704"/></g></svg></span> Up to 6 people</p>
+              <div class="item__head"><h3 class="board__name">The Casita Board</h3><span class="item__lead" aria-hidden="true"></span><p class="board__price"><span class="visually-hidden">$</span>220</p></div>
+              <ul class="board__contents" data-reveal-group>
+                <li data-reveal-item>6 chalupas</li>
+                <li data-reveal-item>6 tacos</li>
+                <li data-reveal-item>6 taquitos</li>
+                <li data-reveal-item>Chipotle honey wings</li>
+                <li data-reveal-item>Corn ribs</li>
+                <li data-reveal-item>Cauliflower</li>
+                <li data-reveal-item>Tortilla chips &amp; salsa</li>
+              </ul>
+              <p class="board__add">Add an optional 30oz grilled boneless ribeye +80</p>
+            </article>
+            <figure class="board__photo" data-image-reveal>
+              <picture><source srcset="assets/images/story/chef-720.webp 720w, assets/images/story/chef-1280.webp 1280w" sizes="(min-width: 900px) 40vw, 100vw" type="image/webp" /><img src="assets/images/story/chef-1280.jpg" width="1280" height="960" alt="Chef Lenny holding a wooden board of tacos, flautas and sides" loading="lazy" decoding="async" /></picture>
+              <figcaption>Chef Lenny, board in hand</figcaption>
+            </figure>
+            <article class="board board--asada">
+              <p class="board__serves"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="6" r="4"/><path stroke-linecap="round" d="M15 9C16.6569 9 18 7.65685 18 6C18 4.34315 16.6569 3 15 3"/><ellipse cx="9" cy="17" rx="7" ry="4"/><path stroke-linecap="round" d="M18 14C19.7542 14.3847 21 15.3589 21 16.5C21 17.5293 19.9863 18.4229 18.5 18.8704"/></g></svg></span> Up to 4 people</p>
+              <div class="item__head"><h3 class="board__name">The Asada Board</h3><span class="item__lead" aria-hidden="true"></span><p class="board__price"><span class="visually-hidden">$</span>220</p></div>
+              <p class="item__desc">30oz grilled Argentina rib eye, cauliflower, corn ribs, fries, loaded nachos, rice, black beans, tortillas and a side salad.</p>
+            </article>
+            <article class="board board--gaucho" id="gaucho-ribeye">
+              <p class="board__serves">For two, or one very hungry</p>
+              <div class="item__head"><h3 class="board__name">30oz bone-in gaucho ribeye</h3><span class="item__lead" aria-hidden="true"></span><p class="board__price"><span class="visually-hidden">$</span>95</p></div>
+              <p class="item__desc">Prime bone-in American rib eye, served sliced, with your choice of two sides.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 05 FROM THE GRILL ============ -->
+      <section class="chapter chapter--tile" id="mains" aria-labelledby="mains-title">
+        <div class="tile-bg" aria-hidden="true"><img src="assets/images/backgrounds/tile-wall.webp" width="1600" height="1167" alt="" loading="lazy" decoding="async" /></div>
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>05</span> Mains</p>
+            <h2 class="chapter__title" id="mains-title" data-split>From the grill.</h2>
+            <p class="chapter__note">Every main is gluten-free.</p>
+          </header>
+          <ul class="items" data-reveal-group>
+            <li class="item" data-reveal-item>
+              <div class="item__head"><p class="item__name">Steak frites</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>65</p></div>
+              <p class="item__desc">12oz premium Argentina rib eye, french fries, Israeli salad, house chimichurri</p>
+            </li>
+            <li class="item" id="fajitas" data-reveal-item>
+              <div class="item__head"><p class="item__name">Sizzling fajitas</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>52 <small>chicken</small> / 68 <small>steak</small></p></div>
+              <p class="item__desc">Sizzling boneless rib eye steak or chicken, peppers and onions, with corn tortillas, Spanish rice and black beans</p>
+            </li>
+            <li class="item" id="half-chicken" data-reveal-item>
+              <div class="item__head"><p class="item__name">Boneless half chicken al carbon</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>48</p></div>
+              <p class="item__desc">Grilled and finished with a balsamic demi-glaze, with a charred sweet potato and your choice of one side</p>
+            </li>
+            <li class="item" id="korean-short-ribs" data-reveal-item>
+              <div class="item__head"><p class="item__name">Korean grilled short ribs</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>60</p></div>
+              <p class="item__desc">Soy, ginger and garlic marinated, sliced thin and grilled, with charred sweet potato</p>
+            </li>
+            <li class="item" data-reveal-item>
+              <div class="item__head"><p class="item__name">Flat iron carne asada plate</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>49</p></div>
+              <p class="item__desc">8oz flat iron steak, served fajita style with Spanish rice, black beans, choice of salsas and tortillas</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ 06 BURGERS ============ -->
+      <section class="chapter chapter--paper-2" id="burgers" aria-labelledby="burgers-title">
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>06</span> Sandwiches &amp; burgers</p>
+            <h2 class="chapter__title" id="burgers-title" data-split>Mostly on pretzel buns. Always with fries.</h2>
+          </header>
+          <ul class="items" data-reveal-group>
+            <li class="item" data-reveal-item>
+              <div class="item__head"><p class="item__name">Fried chicken sandwich</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>33</p></div>
+              <p class="item__desc">Crispy coated boneless chicken, homemade slaw, chipotle honey sauce on a pretzel bun</p>
+            </li>
+            <li class="item" data-reveal-item>
+              <div class="item__head"><p class="item__name">Lenny's Big Mac</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>33</p></div>
+              <p class="item__desc">Double thin burger patty, melted vegan cheese, big mac sauce, shredded lettuce, onions and pickles on a sesame bun</p>
+            </li>
+            <li class="item" data-reveal-item>
+              <div class="item__head"><p class="item__name">Carlos Jr. burger</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>35</p></div>
+              <p class="item__desc">¼ lb. cheeseburger, BBQ-glazed crispy pastrami, crispy onion ring, arugula and amba aioli on a fresh baked pretzel bun</p>
+            </li>
+            <li class="item" data-reveal-item>
+              <div class="item__head"><p class="item__name">Wagyu Bazaar burger</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>36</p></div>
+              <p class="item__desc">Wagyu beef blend, amba aioli, baby arugula, caramelized onion and sliced tomato on a fresh baked pretzel bun</p>
+            </li>
+            <li class="item" id="brisket-pita" data-reveal-item>
+              <div class="item__head"><p class="item__name">Demi glace brisket pita</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>29</p></div>
+              <p class="item__desc">Slow-cooked prime brisket, demi glace sauce, pickled vegetables, caramelized onion, pickles and amba, with homemade crispy tortilla chips. Swap in fries for 5.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ 07 SOUPS & SALADS ============ -->
+      <section class="chapter chapter--paper" id="soups-salads" aria-labelledby="soups-title">
+        <div class="chapter__inner split">
+          <div>
+            <header class="chapter__head">
+              <p class="chapter__kicker"><span>07</span> Soups &amp; salads</p>
+              <h2 class="chapter__title" id="soups-title" data-split>Bowls with a story.</h2>
+            </header>
+            <h3 class="subhead">Soups</h3>
+            <ul class="items" data-reveal-group>
+              <li class="item" data-reveal-item>
+                <div class="item__head"><p class="item__name">Tortilla lime soup</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>22</p></div>
+                <p class="item__desc">The ultimate comfort food: chicken stock, blended tortilla, lime and a crispy tortilla garnish</p>
+                <ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" id="birria-ramen" data-reveal-item>
+                <div class="item__head"><p class="item__name">Birria ramen</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>24</p></div>
+                <p class="item__desc">24-hour veal broth with guajillo chiles, braised beef, organic ramen noodles, fresh cilantro and onion</p>
+              </li>
+            </ul>
+            <h3 class="subhead">Salads</h3>
+            <ul class="items" data-reveal-group>
+              <li class="item" id="israeli-salad" data-reveal-item>
+                <div class="item__head"><p class="item__name">Israeli salad</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>21</p></div>
+                <p class="item__desc">Diced cucumber, tomato, red onion, Italian parsley, lemon juice, olive oil, salt and pepper</p>
+                <ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" data-reveal-item>
+                <div class="item__head"><p class="item__name">Balagan salad</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>21</p></div>
+                <p class="item__desc">Chinese-inspired: shredded cabbage, soy-ginger sesame dressing, candied walnuts and crispy tortilla</p>
+                <ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Contains nuts">Nuts</abbr></li></ul>
+              </li>
+              <li class="item" data-reveal-item>
+                <div class="item__head"><p class="item__name">Southwestern chopped salad</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>21</p></div>
+                <p class="item__desc">Romaine, tomato, roasted corn, black beans and crunchy tortilla strips with a creamy cilantro lime dressing</p>
+                <ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+              <li class="item" data-reveal-item>
+                <div class="item__head"><p class="item__name">Bazaar plate</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>21</p></div>
+                <p class="item__desc">A Mediterranean plate with Spanish rice, Israeli salad and turshi</p>
+                <ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul>
+              </li>
+            </ul>
+            <div class="addons">
+              <p class="addons__title">Add protein to any salad</p>
+              <ul class="addons__list">
+                <li>Roasted wild mushrooms <strong>+6</strong></li>
+                <li>Pollo (chicken) <strong>+8</strong></li>
+                <li>Carne asada (steak) <strong>+10</strong></li>
+                <li>Prime ribeye <strong>+18</strong></li>
+              </ul>
+            </div>
+          </div>
+          <figure class="split__media" data-image-reveal>
+            <picture><source srcset="assets/images/food/chopped-salad-720.webp 720w, assets/images/food/chopped-salad-1280.webp 1280w" sizes="(min-width: 900px) 38vw, 100vw" type="image/webp" /><img src="assets/images/food/chopped-salad-1280.jpg" width="1280" height="1919" alt="Israeli salad of diced tomato, cucumber and red onion in a dark bowl on green tile" loading="lazy" decoding="async" /></picture>
+            <figcaption>Pictured: Israeli salad</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ 08 SIDES & KIDS ============ -->
+      <section class="chapter chapter--paper-2" id="sides" aria-labelledby="sides-title">
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>08</span> Sides &amp; kids</p>
+            <h2 class="chapter__title" id="sides-title" data-split>On the side, and for the little ones.</h2>
+          </header>
+          <div class="pair">
+            <div>
+              <h3 class="subhead">Sides <abbr class="tag" title="Vegetarian">V</abbr> <abbr class="tag" title="Gluten-free">GF</abbr></h3>
+              <ul class="price-list price-list--ink">
+                <li><span>Spanish rice</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>8</span></li>
+                <li><span>Black beans</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>8</span></li>
+                <li><span>French fries</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>12</span></li>
+                <li><span>Garlic herb fries</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>17</span></li>
+                <li><span>Chopped salad</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>12</span></li>
+                <li><span>Roasted sweet potato</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>12</span></li>
+                <li><span>Roasted wild mushrooms</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>15</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="subhead">Kids menu</h3>
+              <ul class="price-list price-list--ink">
+                <li><span>Hot dog bites &amp; fries</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>18</span></li>
+                <li><span>Chicken strips &amp; fries</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>19</span></li>
+                <li><span>Kid's burger &amp; fries</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>20</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 09 DRINKS (after dark) ============ -->
+      <section class="chapter chapter--night" id="drinks" aria-labelledby="drinks-title">
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>09</span> Drinks</p>
+            <h2 class="chapter__title" id="drinks-title" data-split>After dark, the bar takes over.</h2>
+            <p class="chapter__note">No pre-made syrups or artificial flavors. Limes are squeezed fresh, and the bar makes its own bitters, salts and spice blends.</p>
+          </header>
+
+          <article class="cesar" data-reveal>
+            <img src="assets/images/cocktails/cesar-mateo.webp" width="254" height="349" alt="Hands stirring a tall cocktail over ice at the bar" loading="lazy" decoding="async" />
+            <div>
+              <p class="cesar__label">Cocktails by mixologist</p>
+              <h3 class="cesar__name">Cesar Mateo</h3>
+              <p>Cesar moved to LA from Oaxaca at 11. He started out washing dishes, got his shot as a barback, and worked his way up behind the bars at Copa de Oro in Santa Monica and Bar Claxon downtown before managing the bar at Guerrilla Tacos.</p>
+              <p>He joined Lenny's Casita during the ghost-kitchen days, became family, and drove the push for a full liquor license. This list is years of his work.</p>
+            </div>
+          </article>
+
+          <h3 class="drinks__heading">Cocktails</h3>
+          <ol class="drinks" data-reveal-group>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/spicy-margarita-balagan.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Spicy Margarita Balagán</p><p class="drink__desc">Bold jalapeño-infused tequila balanced with lime</p><p class="drink__notes">Spicy · Earthy · Refreshing</p><p class="drink__pairs">Pairs with <a href="#tacos">quesabirria tacos</a>, a <a href="#quesadilla">quesadilla</a>, <a href="#burrito">burrito</a> or <a href="#crunchwrap">crunchwrap</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>21</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/mojito-pasiflor.webp" width="602" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Mojito Pasiflor</p><p class="drink__desc">Rum mingled with passionfruit and fresh mint for a tropical refreshment</p><p class="drink__notes">Tropical · Sour · Bright</p><p class="drink__pairs">Pairs with the <a href="#israeli-salad">Israeli salad</a> or <a href="#tacos">tacos</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>24</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/waterpamelon.webp" width="602" height="902" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Waterpamelon</p><p class="drink__desc">Tequila paloma with watermelon, lime and grapefruit soda</p><p class="drink__notes">Refreshing · Sweet · Citrusy</p><p class="drink__pairs">Pairs with <a href="#birria-ramen">birria ramen</a> or <a href="#tacos">quesabirria tacos</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>21</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/cocoliso.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Cocoliso</p><p class="drink__desc">Piña colada with fresh carrot juice, lemongrass, pineapple and creamy coconut. The pineapple cup comes with a double portion.</p><p class="drink__notes">Creamy · Sweet · Tropical</p><p class="drink__pairs">Pairs with <a href="#korean-short-ribs">Korean short ribs</a> or any <a href="#burgers">burger</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>22</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/616-gimlet.webp" width="602" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">616 Gimlet</p><p class="drink__desc">Gin gimlet blended with cucumber, floral lychee and sage</p><p class="drink__notes">Floral · Botanical · Fruity</p><p class="drink__pairs">Pairs with <a href="#casita-cauliflower">Casita cauliflower</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>20</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/la-manzana.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">La Manzana Whiskey Sour</p><p class="drink__desc">Banana-infused whiskey sour with cocoa bitters, egg white and a velvety red wine float</p><p class="drink__notes">Decadent · Velvety · Tart</p><p class="drink__pairs">Pairs with the <a href="#gaucho-ribeye">gaucho bone-in ribeye</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>24</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/matcha-mule.webp" width="603" height="902" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Matcha Mule</p><p class="drink__desc">Vanilla bean–infused tequila, matcha and ginger beer. Mezcal available for a smoky twist.</p><p class="drink__notes">Spicy · Herbal · Sweet</p><p class="drink__pairs">Pairs with a <a href="#flatbread">flatbread</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>18</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/carefuleta.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Carefuleta</p><p class="drink__desc">A frozen blend of arak, lemon and mint, inspired by the classic Middle Eastern limonana</p><p class="drink__notes">Bright · Citrusy · Licorice</p><p class="drink__pairs">Pairs with the <a href="#brisket-pita">brisket pita</a> or <a href="#arayis">arayis</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>21</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/mangorita.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Mangorita</p><p class="drink__desc">Frozen mango margarita with a Tajín rim. Made spicy on request.</p><p class="drink__notes">Tropical · Citrusy with a kick · Sweet</p><p class="drink__pairs">Pairs with <a href="#chipotle-honey-wings">chipotle honey wings</a> or <a href="#corn-ribs">corn ribs</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>22</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/miami-vice.webp" width="602" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Miami Vice</p><p class="drink__desc">Creamy colada with pineapple, orange, lime and white rum, finished with a strawberry lava float</p><p class="drink__notes">Creamy · Tropical · Fruity</p><p class="drink__pairs">Pairs with <a href="#short-rib-taquitos">short rib taquitos</a> or the <a href="#half-chicken">half chicken al carbon</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>20</p>
+            </li>
+            <li class="drink" data-reveal-item>
+              <img class="drink__img" src="assets/images/cocktails/michelada.webp" width="603" height="903" alt="" loading="lazy" decoding="async" />
+              <div><p class="drink__name">Michelada de Casita</p><p class="drink__desc">Roasted heirloom tomatoes, fresh lime, Mexican lager and a Tajín rim</p><p class="drink__notes">Tangy · Spicy · Refreshing</p><p class="drink__pairs">Pairs with <a href="#fajitas">fajitas</a>, <a href="#short-rib-taquitos">taquitos</a> or <a href="#chalupas">chalupas</a></p></div>
+              <p class="drink__price"><span class="visually-hidden">$</span>14</p>
+            </li>
+          </ol>
+
+          <div class="bar-menu">
+            <section class="bar-menu__col" aria-labelledby="beer-title">
+              <h3 class="bar-menu__title" id="beer-title">Beer</h3>
+              <p class="bar-menu__sub">Draft</p>
+              <ul class="price-list">
+                <li><span>Modelo Negra</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>9</span></li>
+                <li><span>Pacifico Mexican lager</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>9</span></li>
+              </ul>
+              <p class="bar-menu__sub">Mexican imports</p>
+              <ul class="price-list">
+                <li><span>Corona Familiar caguama</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>18</span></li>
+                <li><span>Corona Familiar</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>8</span></li>
+                <li><span>Pacifico</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>7</span></li>
+                <li><span>Modelo</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>7</span></li>
+                <li><span>Lenny's Cerveza <small>house lager with Long Beach Beer Lab</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>7</span></li>
+              </ul>
+              <p class="bar-menu__sub">Gringo beers</p>
+              <ul class="price-list">
+                <li><span>Blue Moon</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>8</span></li>
+                <li><span>Guinness</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>8</span></li>
+                <li><span>Long Beach Beer Lab IPA</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>7</span></li>
+              </ul>
+            </section>
+            <section class="bar-menu__col" aria-labelledby="wine-title">
+              <h3 class="bar-menu__title" id="wine-title">Wine</h3>
+              <p class="bar-menu__sub">Red · glass / bottle</p>
+              <ul class="price-list">
+                <li><span>Or Hanguz Cabernet 2023 <small>Israel</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>14 / 59</span></li>
+                <li><span>The Tribe Cabernet 2024 <small>Israel</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>18 / 70</span></li>
+                <li><span>Covenant Merlot Black Label 2024 <small>California · bottle</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>160</span></li>
+                <li><span>Covenant Cabernet Black Label 2023 <small>California · bottle</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>218</span></li>
+              </ul>
+              <p class="bar-menu__sub">White · glass / bottle</p>
+              <ul class="price-list">
+                <li><span>Or Hanguz Sauvignon Blanc 2024 <small>Israel</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>12 / 49</span></li>
+                <li><span>The Tribe Sauvignon Blanc 2025 <small>California</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>15 / 70</span></li>
+                <li><span>Dignitary Chardonnay 2021 <small>Israel</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>18 / 70</span></li>
+              </ul>
+              <p class="bar-menu__sub">Sparkling · glass / bottle</p>
+              <ul class="price-list">
+                <li><span>Vera Wang Rosé Brut <small>Italy</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>18 / 70</span></li>
+                <li><span>Bartenura Prosecco <small>Italy</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>12 / 50</span></li>
+                <li><span>Bartenura Moscato <small>Italy</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>12 / 48</span></li>
+              </ul>
+              <p class="bar-menu__fine">Corkage fee 30</p>
+            </section>
+            <section class="bar-menu__col" aria-labelledby="flights-title">
+              <h3 class="bar-menu__title" id="flights-title">Flights</h3>
+              <ul class="price-list">
+                <li><span>Beer flight</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>18</span></li>
+                <li><span>Margarita flight</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>30</span></li>
+                <li><span>Centinela flight</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>30</span></li>
+              </ul>
+              <h3 class="bar-menu__title bar-menu__title--gap">Non-alcoholic</h3>
+              <ul class="price-list">
+                <li><span>Coke, Coke Zero, Diet Coke</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>5</span></li>
+                <li><span>Sprite</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>5</span></li>
+                <li><span>Snapple</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>5</span></li>
+                <li><span>Topo Chico sparkling water</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>6</span></li>
+                <li><span>Topo Chico lime</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>6</span></li>
+                <li><span>Mineral water <small>1 liter</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>10</span></li>
+                <li><span>Sparkling water <small>1 liter</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>10</span></li>
+              </ul>
+            </section>
+          </div>
+
+          <details class="backbar">
+            <summary>The back bar: tequila, mezcal &amp; more <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9L12 15L5 9"/></svg></span></summary>
+            <p class="backbar__note">From the house cocktail book. Bottles change, so ask what's pouring tonight.</p>
+            <div class="backbar__cols">
+              <div class="backbar__group backbar__group--long">
+                <h4>Tequila</h4>
+                <ul>
+                  <li>Casamigos Blanco</li><li>Casamigos Reposado</li><li>Casa Dragones Blanco</li><li>Cascanez Añejo</li><li>Cascanez Reposado</li><li>Cabal Blanco</li><li>Clase Azul Reposado</li><li>Don Fulano Blanco</li><li>Don Julio Blanco</li><li>Don Julio Reposado</li><li>Don Julio 1942 Añejo</li><li>Mr Sancho Pancho Blanco</li><li>Solento Organic Blanco</li><li>Casa Azul Orgánico Blanco</li><li>El Tequileño Blanco</li><li>Fortaleza Añejo</li><li>Fortaleza Reposado</li><li>G4 Blanco</li><li>Grand Mayan Extra Aged Añejo</li><li>Mandala Blanco</li><li>4 Copas Orgánico Blanco, Reposado &amp; Añejo</li><li>Patrón Silver</li><li>Patrón Blanco</li><li>Patrón Añejo</li><li>Siete Leguas Añejo</li><li>Siete Leguas Reposado</li><li>Tapatío Blanco</li><li>Tequila Ocho Blanco</li><li>Tequila Ocho Reposado</li><li>Tequila Ocho Añejo</li><li>Don Ramón Añejo</li><li>Avión Blanco</li><li>Suavecito Añejo</li><li>Zarza Silver Blanco</li><li>Herradura Silver Blanco</li><li>Herradura Reposado</li><li>Milagro Silver Blanco</li><li>José Cuervo Reserva de la Familia Extra Añejo</li>
+                </ul>
+              </div>
+              <div class="backbar__group">
+                <h4>Mezcal</h4>
+                <ul><li>Amarás</li><li>Amarás Logia Jabalí</li><li>Amarás Logia Sierra Negra</li><li>Amarás Logia Sacatoro</li><li>Verde Momento Amarás</li><li>Montelobos</li><li>Montelobos Tobalá</li><li>Don Ramón</li></ul>
+              </div>
+              <div class="backbar__group"><h4>Arak</h4><ul><li>Elite Arak</li></ul></div>
+              <div class="backbar__group"><h4>Gin</h4><ul><li>Bombay Sapphire</li><li>Hendrick's</li></ul></div>
+              <div class="backbar__group"><h4>Rum</h4><ul><li>Bacardí Blanco</li><li>Bacardí Gold</li></ul></div>
+              <div class="backbar__group"><h4>Vodka</h4><ul><li>Grey Goose</li><li>Tito's</li></ul></div>
+              <div class="backbar__group"><h4>Whiskey</h4><ul><li>Glenlivet 12 yr</li><li>Jack Daniel's</li><li>Johnnie Walker Black Label</li><li>Maker's Mark</li></ul></div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- ============ 10 HAPPY HOUR ============ -->
+      <section class="chapter chapter--happy" id="happy-hour" aria-labelledby="happy-title">
+        <div class="chapter__inner">
+          <header class="chapter__head">
+            <p class="chapter__kicker"><span>10</span> Happy hour</p>
+            <h2 class="chapter__title" id="happy-title" data-split>Happy times at Casita.</h2>
+            <p class="chapter__note">Ask us for happy hour days and times: <a href="tel:+13236775597">(323) 677-5597</a>.</p>
+          </header>
+          <div class="happy">
+            <div class="happy__sig">
+              <p class="happy__big"><span class="visually-hidden">$</span>11</p>
+              <div>
+                <h3 class="happy__sig-title">Signature cocktails</h3>
+                <ul class="happy__names">
+                  <li>Margarita</li><li>Old-fashioned</li><li>G&amp;T</li><li>Mojito</li><li>Jalisco mule</li><li>Lemonarak</li><li>Boilermaker</li><li>Michelada</li>
+                </ul>
+              </div>
+            </div>
+            <div class="happy__deals">
+              <div class="deal">
+                <p class="deal__title">Happy pint deal</p>
+                <p class="deal__line"><span>Draft beer, Pacifico or Modelo Negra</span><strong><span class="visually-hidden">$</span>5</strong></p>
+                <p class="deal__line"><span>Any back-shelf bottle</span><strong>20% off</strong></p>
+              </div>
+              <div class="deal">
+                <p class="deal__title">Flight packages</p>
+                <p class="deal__line"><span>Beer flight</span><strong><span class="visually-hidden">$</span>18</strong></p>
+                <p class="deal__line"><span>Margarita flight</span><strong><span class="visually-hidden">$</span>25</strong></p>
+                <p class="deal__line"><span>All aboard, both in one</span><strong><span class="visually-hidden">$</span>40</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="happy__menus">
+            <div>
+              <h3 class="subhead">Happy tapas <small>perfect to share or snack solo</small></h3>
+              <ul class="items items--single" data-reveal-group>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Chips &amp; guac</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>8</p></div><p class="item__desc">House-fried tortilla chips with fresh guacamole and salsas</p><ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Lenny's wings</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>12</p></div><p class="item__desc">Chipotle, mango habanero, or buffalo</p></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Corn ribs</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>12</p></div><p class="item__desc">Seasoned with homemade garlic butter</p><ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Mini arayis</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>12</p></div><p class="item__desc">Grilled pita stuffed with spiced beef</p></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Cauliflower</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>12</p></div><p class="item__desc">Green tahini, silan, cilantro gremolata, candied pecans and cranberries</p><ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li><li><abbr class="tag" title="Contains pecans">Nuts</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Homemade fries</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>7</p></div><p class="item__desc">Seasoned with salt and pepper</p><ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Mix &amp; match tapas tray</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>26</p></div><p class="item__desc">Choose any 3 above</p></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="subhead">Happy bites <small>bold flavors in bite-sized form</small></h3>
+              <ul class="items items--single" data-reveal-group>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Chorizo taco trio (3)</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>12</p></div><p class="item__desc">Salsa verde, pico de gallo, pickled onion</p><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Happy chalupas (2)</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>10</p></div><p class="item__desc">Crispy shells, chorizo, salsa, pickled onion</p><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Little Lenny's tostadas (2)</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>15</p></div><p class="item__desc">Black beans, ground chorizo, lettuce, sour cream, avocado crema and pickled onions</p><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Loaded nachos</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>15</p></div><p class="item__desc">Chorizo, house beans, salsa</p><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Little Mac</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>16</p></div><p class="item__desc">A single-patty Big Mac–inspired burger. Add fries for 5.</p></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Flatbread</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>18</p></div><p class="item__desc">Umami truffle mushroom, crispy pastrami, or pulled brisket</p></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Street taco (1)</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>7</p></div><p class="item__desc">Salsa verde, pico and pickled onion; brisket, carne asada or pollo</p><ul class="tags"><li><abbr class="tag" title="Gluten-free">GF</abbr></li></ul></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Loaded chicken flautas (2)</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>15</p></div><p class="item__desc">Crispy chicken taquitos with guacamole, lettuce and vegan sour cream</p></li>
+                <li class="item" data-reveal-item><div class="item__head"><p class="item__name">Churro waffle bites (2)</p><span class="item__lead" aria-hidden="true"></span><p class="item__price"><span class="visually-hidden">$</span>8</p></div><p class="item__desc">Churro waffles dusted with cinnamon sugar, with whipped cream</p><ul class="tags"><li><abbr class="tag" title="Vegetarian">V</abbr></li></ul></li>
+              </ul>
+            </div>
+          </div>
+          <p class="happy__sibling">Little Lenny's, the fast-casual sibling, is at 11923 Ventura Blvd, Studio City.</p>
+        </div>
+      </section>
+
+      <!-- ============ 11 SHABBAT ============ -->
+      <section class="chapter chapter--tile shabbat" id="shabbat" aria-labelledby="shabbat-title">
+        <div class="tile-bg" aria-hidden="true"><img src="assets/images/backgrounds/tile-wall.webp" width="1600" height="1167" alt="" loading="lazy" decoding="async" /></div>
+        <div class="chapter__inner shabbat__grid">
+          <div class="shabbat__panel glass glass-edge">
+            <p class="chapter__kicker"><span>11</span> Shabbat</p>
+            <h2 class="chapter__title" id="shabbat-title" data-split>Shabbat dinner, handled.</h2>
+            <p>Friday orders go through Lenny's Shabbat Shuk: dips, salads and mains for the Shabbat table, from the same kitchen on Pico.</p>
+            <a class="btn btn--onion btn--lg" href="https://www.lennysshabbatshuk.com/">Order from the Friday menu <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a>
+            <ul class="shabbat__facts">
+              <li><span>Friday at the Casita</span><span>9:00 AM – 3:00 PM</span></li>
+              <li><span>Saturday</span><span>Closed</span></li>
+              <li><span>Shuk questions</span><a href="mailto:manager@lennyscasita.com">manager@lennyscasita.com</a></li>
+              <li><span>Kiddush catering</span><a href="https://www.culturabylenny.com/">Cultura by Lenny</a></li>
+            </ul>
+          </div>
+          <div class="shabbat__hits" data-reveal>
+            <h3 class="subhead">Best hits from the Shuk</h3>
+            <ul class="price-list">
+              <li><span>Roasted jalapeño <small>charred, marinated with garlic, made for challah</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>11</span></li>
+              <li><span>Eggplant Shuk <small>fried eggplant, cilantro, garlic, a touch of vinegar</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>9–17</span></li>
+              <li><span>Truffle babaganoush</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>9–17</span></li>
+              <li><span>Shuk salat <small>herbs, pomegranate, cranberries, roasted cashews</small></span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>21</span></li>
+              <li><span>Wagyu short rib, honey glaze</span><span class="lead" aria-hidden="true"></span><span><span class="visually-hidden">$</span>65</span></li>
+            </ul>
+            <p class="shabbat__note">Prices from lennysshabbatshuk.com. Favorites sell out, so order early.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ NOTES ============ -->
+    <section class="notes" aria-labelledby="notes-title">
+      <div class="notes__inner">
+        <h2 class="notes__title" id="notes-title">Good to know</h2>
+        <dl class="notes__legend">
+          <div><dt><abbr class="tag" title="Vegetarian">V</abbr></dt><dd>Marked V on the house menu</dd></div>
+          <div><dt><abbr class="tag" title="Gluten-free">GF</abbr></dt><dd>Gluten-free</dd></div>
+          <div><dt><abbr class="tag" title="Contains nuts">Nuts</abbr></dt><dd>Contains nuts</dd></div>
+        </dl>
+        <ul class="notes__list">
+          <li>Glatt kosher under OK supervision.</li>
+          <li>An automatic gratuity is added for groups of 6 or more.</li>
+          <li>Tell your server about any allergies before you order.</li>
+          <li>Prices and availability can change. The house menus are the final word:</li>
+        </ul>
+        <div class="notes__pdfs">
+          <a href="https://fisherman.gumlet.io/public/lennyscasita/LENNYS_CASITA_The_Menu_May_15.pdf"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"/><path stroke-linecap="round" d="M8 12H16"/><path stroke-linecap="round" d="M8 8H16"/><path stroke-linecap="round" d="M8 16H13"/></g></svg></span> Main menu (PDF)</a>
+          <a href="https://fisherman.gumlet.io/public/lennyscasita/LENNYS_CASITA_Happy_Hour_5.14.26.pdf"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"/><path stroke-linecap="round" d="M8 12H16"/><path stroke-linecap="round" d="M8 8H16"/><path stroke-linecap="round" d="M8 16H13"/></g></svg></span> Happy hour (PDF)</a>
+          <a href="https://fisherman.gumlet.io/public/lennyscasita/Lenny_s_cocktail_book_v5.pdf"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"/><path stroke-linecap="round" d="M8 12H16"/><path stroke-linecap="round" d="M8 8H16"/><path stroke-linecap="round" d="M8 16H13"/></g></svg></span> Cocktail book (PDF)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__cta">
+      <p class="footer__big" data-split>See you on Pico.</p>
+      <a class="btn btn--onion btn--lg" href="https://www.opentable.com/restref/client/?restref=1266316&amp;lang=en-US&amp;ot_source=Restaurant%20website">Reserve a table <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a>
+    </div>
+    <div class="footer__bottom">
+      <img class="footer__logo" src="assets/images/branding/logo-white.png" width="184" height="120" alt="Lenny's Casita" loading="lazy" />
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="https://www.lennysshabbatshuk.com/">Shabbat Shuk</a>
+        <a href="https://www.culturabylenny.com/">Catering</a>
+        <a href="https://www.lennyscasita.com/blog/">Blog</a>
+        <a href="https://www.lennyscasita.com/hiring/">Hiring</a>
+        <a href="https://www.lennyscasita.com/contact/">Contact</a>
+      </nav>
+      <ul class="footer__social">
+        <li><a href="https://www.instagram.com/lennyscasita" aria-label="Instagram"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7.03.084c-1.277.06-2.149.264-2.91.563a5.9 5.9 0 0 0-2.124 1.388a5.9 5.9 0 0 0-1.38 2.127C.321 4.926.12 5.8.064 7.076s-.069 1.688-.063 4.947s.021 3.667.083 4.947c.061 1.277.264 2.149.563 2.911c.308.789.72 1.457 1.388 2.123a5.9 5.9 0 0 0 2.129 1.38c.763.295 1.636.496 2.913.552c1.278.056 1.689.069 4.947.063s3.668-.021 4.947-.082c1.28-.06 2.147-.265 2.91-.563a5.9 5.9 0 0 0 2.123-1.388a5.9 5.9 0 0 0 1.38-2.129c.295-.763.496-1.636.551-2.912c.056-1.28.07-1.69.063-4.948c-.006-3.258-.02-3.667-.081-4.947c-.06-1.28-.264-2.148-.564-2.911a5.9 5.9 0 0 0-1.387-2.123a5.9 5.9 0 0 0-2.128-1.38c-.764-.294-1.636-.496-2.914-.55C15.647.009 15.236-.006 11.977 0S8.31.021 7.03.084m.14 21.693c-1.17-.05-1.805-.245-2.228-.408a3.7 3.7 0 0 1-1.382-.895a3.7 3.7 0 0 1-.9-1.378c-.165-.423-.363-1.058-.417-2.228c-.06-1.264-.072-1.644-.08-4.848c-.006-3.204.006-3.583.061-4.848c.05-1.169.246-1.805.408-2.228c.216-.561.477-.96.895-1.382a3.7 3.7 0 0 1 1.379-.9c.423-.165 1.057-.361 2.227-.417c1.265-.06 1.644-.072 4.848-.08c3.203-.006 3.583.006 4.85.062c1.168.05 1.804.244 2.227.408c.56.216.96.475 1.382.895s.681.817.9 1.378c.165.422.362 1.056.417 2.227c.06 1.265.074 1.645.08 4.848c.005 3.203-.006 3.583-.061 4.848c-.051 1.17-.245 1.805-.408 2.23c-.216.56-.477.96-.896 1.38a3.7 3.7 0 0 1-1.378.9c-.422.165-1.058.362-2.226.418c-1.266.06-1.645.072-4.85.079s-3.582-.006-4.848-.06m9.783-16.192a1.44 1.44 0 1 0 1.437-1.442a1.44 1.44 0 0 0-1.437 1.442M5.839 12.012a6.161 6.161 0 1 0 12.323-.024a6.162 6.162 0 0 0-12.323.024M8 12.008A4 4 0 1 1 12.008 16A4 4 0 0 1 8 12.008"/></svg></span></a></li>
+        <li><a href="https://www.facebook.com/lennyscasita" aria-label="Facebook"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978c.401 0 .955.042 1.468.103a9 9 0 0 1 1.141.195v3.325a9 9 0 0 0-.653-.036a27 27 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.7 1.7 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103l-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647"/></svg></span></a></li>
+        <li><a href="https://www.yelp.com/biz/lennys-casita-los-angeles" aria-label="Yelp"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m7.689 15.142l-3.672.848c-.377.087-.755.183-1.145.155c-.261-.019-.512-.042-.76-.213a1.2 1.2 0 0 1-.332-.36c-.348-.551-.365-1.366-.37-2a6.3 6.3 0 0 1 .332-2.064a2 2 0 0 1 .107-.248a2 2 0 0 1 .126-.216a3 3 0 0 1 .156-.198a1.2 1.2 0 0 1 .399-.283a1.1 1.1 0 0 1 .46-.083c.235.001.513.052.91.173c.055.02.123.038.185.057c.328.101.705.24 1.15.399q1.027.36 2.046.74l1.212.442q.333.12.64.297c.175.098.328.23.452.387a1.2 1.2 0 0 1 .192.43a1.22 1.22 0 0 1-.872 1.453q-.072.022-.108.03l-1.105.255zM18.82 7.565a2 2 0 0 0-.204-.175a2 2 0 0 0-.208-.14a2 2 0 0 0-.227-.109a1.2 1.2 0 0 0-.482-.08a1.1 1.1 0 0 0-.45.127c-.21.105-.439.273-.742.555c-.042.042-.095.089-.142.133c-.25.235-.528.525-.86.863a115 115 0 0 0-1.516 1.563l-.897.93a4 4 0 0 0-.446.548a1.5 1.5 0 0 0-.237.545a1.2 1.2 0 0 0 .011.452l.005.02a1.22 1.22 0 0 0 1.418.923a1 1 0 0 0 .11-.021l4.779-1.104c.376-.087.758-.167 1.097-.363c.227-.132.443-.262.59-.525a1.2 1.2 0 0 0 .141-.469c.073-.65-.267-1.39-.54-1.963a6.3 6.3 0 0 0-1.2-1.71M8.97.075a9 9 0 0 0-.83.157q-.415.097-.815.223c-.868.285-2.089.807-2.295 1.807c-.117.565.16 1.144.373 1.66c.26.625.614 1.189.938 1.778c.854 1.554 1.724 3.099 2.592 4.645c.259.462.542 1.047 1.043 1.286a1 1 0 0 0 .101.038c.225.085.47.102.704.047l.042-.01a1.2 1.2 0 0 0 .566-.34a1 1 0 0 0 .079-.081c.346-.435.345-1.084.376-1.614c.104-1.77.214-3.542.301-5.314c.033-.671.106-1.333.066-2.01c-.033-.557-.037-1.198-.39-1.656c-.621-.807-1.947-.74-2.852-.616m2.083 15.95a1.105 1.105 0 0 0-1.23-.414a1 1 0 0 0-.153.064a1.5 1.5 0 0 0-.217.135c-.2.148-.367.34-.52.532c-.038.049-.074.114-.12.156l-.768 1.057a114 114 0 0 0-1.291 1.79c-.278.389-.519.718-.709 1.009c-.036.054-.073.116-.107.164c-.228.352-.357.61-.423.838a1.1 1.1 0 0 0-.046.472c.021.166.077.325.163.467q.069.108.15.207a2 2 0 0 0 .174.183a2 2 0 0 0 .211.173c.53.37 1.111.634 1.722.84a6 6 0 0 0 1.572.3q.136.006.273-.006a2 2 0 0 0 .25-.035a2 2 0 0 0 .245-.071a1.2 1.2 0 0 0 .418-.266c.112-.113.199-.25.254-.4c.089-.22.147-.502.185-.92c.004-.059.012-.13.018-.195c.03-.346.044-.753.067-1.231q.056-1.103.09-2.203l.05-1.306c.01-.3.001-.634-.082-.934a1.4 1.4 0 0 0-.176-.405m8.676 2.045c-.16-.176-.388-.352-.746-.568l-.169-.101c-.298-.18-.658-.369-1.078-.597a121 121 0 0 0-1.943-1.042l-1.151-.61c-.06-.018-.12-.061-.177-.088a3 3 0 0 0-.699-.25a1.5 1.5 0 0 0-.254-.027a1 1 0 0 0-.165.01a1.11 1.11 0 0 0-.923.914a1.4 1.4 0 0 0 .016.439c.056.306.193.61.335.875l.615 1.152q.512.975 1.043 1.94c.23.421.42.78.598 1.079c.034.056.072.116.101.168c.218.358.392.584.57.746a1.1 1.1 0 0 0 .894.301a2 2 0 0 0 .25-.043q.124-.033.242-.078a2 2 0 0 0 .247-.115a6 6 0 0 0 1.282-.96a6.7 6.7 0 0 0 1.182-1.51q.066-.12.114-.248a3 3 0 0 0 .077-.24a3 3 0 0 0 .043-.252a1.2 1.2 0 0 0-.056-.491a1.1 1.1 0 0 0-.248-.404m2.86 3.742a.85.85 0 0 1-.111.423a.85.85 0 0 1-.312.318a.84.84 0 0 1-.438.119a.85.85 0 0 1-.438-.118a.85.85 0 0 1-.312-.317a.86.86 0 0 1-.111-.425q0-.23.114-.43a.84.84 0 0 1 .315-.316a.85.85 0 0 1 .432-.115a.85.85 0 0 1 .43.114a.84.84 0 0 1 .315.315a.85.85 0 0 1 .116.432m-.12 0q0-.2-.1-.37a.6.6 0 0 0-.27-.27a.7.7 0 0 0-.371-.1a.7.7 0 0 0-.37.099a.75.75 0 0 0-.271.27a.7.7 0 0 0-.1.37q0 .199.1.372a.74.74 0 0 0 .27.271a.74.74 0 0 0 .37.099a.7.7 0 0 0 .37-.1a.74.74 0 0 0 .27-.27a.7.7 0 0 0 .102-.371m-.577.058l.272.452h-.192l-.237-.405h-.155v.405h-.17v-1.02h.3q.19 0 .278.075q.09.075.089.227a.3.3 0 0 1-.05.162a.3.3 0 0 1-.135.104m-.042-.14a.15.15 0 0 0 .056-.122q0-.086-.049-.122q-.05-.039-.156-.038h-.12v.328h.123q.091 0 .146-.047z"/></svg></span></a></li>
+        <li><a href="https://www.tripadvisor.com/Restaurant_Review-g32655-d23298207-Reviews-Lenny_s_Casita-Los_Angeles_California.html" aria-label="Tripadvisor"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43a5.98 5.98 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.97 5.97 0 0 0 4.072 1.598a6 6 0 0 0 6-5.998a5.98 5.98 0 0 0-1.957-4.432L24 6.648h-4.35a13.57 13.57 0 0 0-7.644-2.353M12 6.255c1.531 0 3.063.303 4.504.903C13.943 8.138 12 10.43 12 13.1c0-2.671-1.942-4.962-4.504-5.942A11.7 11.7 0 0 1 12 6.256zM6.002 9.157a4.059 4.059 0 1 1 0 8.118a4.059 4.059 0 0 1 0-8.118m11.992.002a4.057 4.057 0 1 1 .003 8.115a4.057 4.057 0 0 1-.003-8.115m-11.992 1.93a2.128 2.128 0 0 0 0 4.256a2.128 2.128 0 0 0 0-4.256m11.992 0a2.128 2.128 0 0 0 0 4.256a2.128 2.128 0 0 0 0-4.256"/></svg></span></a></li>
+      </ul>
+      <p class="footer__fine">Glatt kosher under OK supervision · 8823 W Pico Blvd, Los Angeles · <a href="tel:+13236775597">(323) 677-5597</a> · © <span data-year>2026</span> Lenny's Casita</p>
+    </div>
+  </footer>
+
+  <nav class="quickbar glass glass-edge" aria-label="Quick actions">
+    <a class="btn btn--ghost-light" href="https://www.orderlennyscasita.com/#most-popular">Order</a>
+    <a class="btn btn--onion" href="https://www.opentable.com/restref/client/?restref=1266316&amp;lang=en-US&amp;ot_source=Restaurant%20website">Reserve</a>
+  </nav>
+
+</body>
+</html>
