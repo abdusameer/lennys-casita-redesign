@@ -292,7 +292,7 @@ function initCounter() {
   });
 
   const mm = gsap.matchMedia();
-  mm.add("(min-width: 961px) and (prefers-reduced-motion: no-preference)", () => {
+  mm.add("(min-width: 961px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)", () => {
     section.classList.add("is-pinned");
     pin = ScrollTrigger.create({
       trigger: section,
@@ -430,9 +430,141 @@ function initPours() {
   onCleanup(() => mm.revert());
 }
 
+/* ---------------- anchored scene (Shabbat Shuk) ---------------- */
+// The scene holds the screen with CSS sticky rather than a GSAP pin: the section grows taller and its contents
+// stick until the section ends, so the release is plain native scroll. It only anchors when its copy fits the
+// screen; on shorter screens it stays in normal flow.
+const ANCHOR_QUERY = "(min-width: 901px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
+
+function anchorWhenItFits(section, sticky, content, className) {
+  const check = () => {
+    section.classList.add(className);
+    const style = getComputedStyle(sticky);
+    const room = sticky.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+    section.classList.toggle(className, content.offsetHeight <= room + 1);
+  };
+  check();
+  ScrollTrigger.addEventListener("refreshInit", check);
+  return () => {
+    ScrollTrigger.removeEventListener("refreshInit", check);
+    section.classList.remove(className);
+  };
+}
+
+/* ---------------- Shabbat Shuk: one dish at a time ---------------- */
+function initShuk() {
+  const section = $("[data-shuk]");
+  if (!section) return;
+  const dishes = $$("[data-shuk-dish]", section);
+  const rail = $$("[data-shuk-go]", section);
+  const indexEl = $("[data-shuk-index]", section);
+  const count = dishes.length;
+  let active = 0;
+  let trigger = null;
+
+  const setActive = (i) => {
+    if (i === active) return;
+    active = i;
+    dishes.forEach((dish, n) => dish.classList.toggle("is-active", n === i));
+    rail.forEach((button, n) => {
+      if (n === i) button.setAttribute("aria-current", "true");
+      else button.removeAttribute("aria-current");
+    });
+    indexEl.textContent = String(i + 1).padStart(2, "0");
+  };
+
+  rail.forEach((button, i) =>
+    listen(button, "click", () => {
+      if (!trigger || !section.classList.contains("is-story")) return;
+      scrollToY(trigger.start + ((i + 0.5) / count) * (trigger.end - trigger.start));
+    })
+  );
+
+  const mm = gsap.matchMedia();
+  mm.add(ANCHOR_QUERY, () => {
+    const release = anchorWhenItFits(section, $("[data-shuk-sticky]", section), $(".shuk__panel", section), "is-story");
+    trigger = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => setActive(Math.min(count - 1, Math.floor(self.progress * count))),
+    });
+    return () => {
+      release();
+      trigger = null;
+    };
+  });
+  onCleanup(() => mm.revert());
+}
+
+/* ---------------- Cultura: two films over the catering board ---------------- */
+// Layout is pure CSS (one composed screen on desktop). This only runs playback.
+function initCultura() {
+  const section = $("[data-cultura]");
+  if (!section) return;
+  const videos = $$("[data-cultura-video]", section);
+  const toggle = $("[data-cultura-toggle]", section);
+  const toggleLabel = $("[data-cultura-toggle-label]", section);
+  const phone = window.matchMedia("(max-width: 900px)");
+  // Posters stay up under reduced motion or Save-Data until someone presses play.
+  let wanted = !reduceMotion && !navigator.connection?.saveData;
+  let near = false;
+
+  const syncToggle = () => {
+    toggle.classList.toggle("is-paused", !wanted);
+    toggleLabel.textContent = wanted ? "Pause videos" : "Play videos";
+  };
+  // The same two <video> elements live for the whole visit; they only ever play or pause.
+  const sync = () => {
+    const run = wanted && near && !document.hidden;
+    videos.forEach((video) => {
+      // Phones play the main film only; the side film keeps its poster.
+      if (run && (!phone.matches || video.dataset.culturaVideo === "main")) {
+        video.muted = true;
+        video.play()?.catch((error) => {
+          if (error.name !== "NotAllowedError") return;
+          wanted = false;
+          syncToggle();
+        });
+      } else if (!video.paused) {
+        video.pause();
+      }
+    });
+    syncToggle();
+  };
+
+  toggle.hidden = false;
+  // If neither film can load, the posters are the section; drop a control that would do nothing.
+  videos.forEach((video) =>
+    listen(video, "error", () => {
+      if (videos.every((v) => v.error)) toggle.hidden = true;
+    })
+  );
+  listen(toggle, "click", () => {
+    wanted = !wanted;
+    sync();
+  });
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      near = entry.isIntersecting;
+      sync();
+    },
+    { rootMargin: "20% 0px" }
+  );
+  observer.observe(section);
+  listen(document, "visibilitychange", sync);
+  listen(phone, "change", sync);
+  onCleanup(() => {
+    observer.disconnect();
+    videos.forEach((video) => video.pause());
+  });
+}
+
 boot(() => {
   initFilm();
   initCounter();
   initBarDrift();
   initPours();
+  initShuk();
+  initCultura();
 });

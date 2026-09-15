@@ -21,12 +21,12 @@ assets/
   images/
     branding/                  Logo
     hero/                      Film poster + 5 scene stills
-    food/                      Dish photography
+    food/                      Dish photography (food/shabbat/: the five Shabbat Shuk dishes)
     cocktails/                 Cocktail photography + Cesar Mateo portrait
-    story/                     Chef Lenny + "takeout years" photos
-    gallery/                   Catering section stills
+    story/                     Chef Lenny portraits + "takeout years" photo
+    gallery/cultura/           Catering platter photo + first-frame posters for the Cultura films
     backgrounds/               Green-tile texture used behind glass panels
-  video/                       (reserved for a future self-hosted video file)
+  video/                       Self-hosted Cultura films (H.264 MP4, muted loops, no audio played)
 dev/                          The original Vite source project (for future edits — see below)
 backups/                      Untouched copies of the two original single-file exports
 ```
@@ -50,14 +50,15 @@ Two ways:
 
 1. **Quick text/price edits**: edit `index.html` / `lennys-casita-menu.html` directly —
    they're plain HTML.
-2. **Structural or style changes**: edit the source in `dev/` (a Vite project) and rebuild:
+2. **Structural or style changes**: edit the source in `dev/` (a Vite project), then rebuild and publish:
    ```bash
    cd dev
    npm install
-   npm run build          # writes dev/dist/
+   npm run build              # writes dev/dist/
+   node scripts/reorg.mjs     # regenerates index.html, lennys-casita-menu.html and assets/ at the repo root
    ```
-   Then re-run the same reorganization used to produce this structure (see
-   `dev/scripts/reorg.mjs`) to refresh the flat `assets/` tree at the repo root.
+   Owner-supplied photos go through `node scripts/owner-media.mjs <folder>` (WebP + JPEG, no upscaling).
+   The trimmed source films live in `dev/public/video/`.
 
 ## Deploying to GitHub Pages
 

@@ -348,9 +348,27 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
 }
 .welcome__copy { grid-column: 4 / span 6; display: grid; gap: 1.1rem; color: var(--ink-2); }
 .welcome__copy .link-arrow { justify-self: start; color: var(--ink); margin-top: 0.5rem; }
+/* Lenny's portrait: bleeds off the page edge and rises into the empty margin beside the headline,
+   so the spread reads headline first, then Lenny, then the story. */
+.welcome__portrait { margin: 0; }
+.welcome__portrait img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; }
+.welcome__portrait figcaption { margin-top: 0.75rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wood); }
+@media (min-width: 861px) {
+  .welcome { overflow-x: clip; }
+  .welcome__grid { --bleed: calc(var(--gutter) + max(0px, (100vw - 2 * var(--gutter) - var(--max)) / 2)); }
+  .welcome__portrait {
+    grid-column: 1 / span 3; grid-row: 2; align-self: start;
+    margin-top: clamp(-7rem, -6vw, -3rem); margin-left: calc(-1 * var(--bleed));
+  }
+  .welcome__portrait figcaption { padding-left: var(--bleed); }
+  .welcome__copy { grid-column: 5 / span 6; grid-row: 2; align-self: start; }
+}
 @media (max-width: 860px) {
+  .welcome { overflow-x: clip; }
   .welcome .label, .welcome__title, .welcome__copy { grid-column: 1 / -1; }
   .welcome__grid { row-gap: 1.5rem; }
+  .welcome__portrait { grid-column: 1 / -1; justify-self: end; width: min(78%, 26rem); margin: 0.5rem calc(-1 * var(--gutter)) 0.75rem 0; }
+  .welcome__portrait img { aspect-ratio: 4 / 5; }
 }
 
 /* ---------- moving word strip ---------- */

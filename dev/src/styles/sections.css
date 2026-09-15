@@ -55,11 +55,22 @@ html:not(.js) .counter__controls { display: none; }
 .round-btn .icon { width: 1.25rem; height: 1.25rem; }
 
 @media (min-width: 961px) {
-  .counter.is-pinned .counter__pin { min-height: 100svh; padding-top: calc(var(--nav-h) + 2rem); padding-bottom: 2rem; }
-  /* Size from the viewport height so the 4:5 frame always fits the pinned screen. */
-  .counter.is-pinned .counter__stage { justify-items: end; }
+  /* Pinned: the whole scene is exactly one screen. Spacing and the plate list tighten with the viewport
+     height, and the 4:5 frame is sized from the height left under the nav, so the controls never clip. */
+  .counter.is-pinned .counter__pin {
+    --pad-t: clamp(0.75rem, 2.5svh, 2rem);
+    --pad-b: clamp(1rem, 3svh, 2rem);
+    height: 100svh;
+    padding-top: calc(var(--nav-h) + var(--pad-t)); padding-bottom: var(--pad-b);
+  }
+  .counter.is-pinned .counter__text { gap: clamp(0.75rem, 2svh, 1.4rem); padding-block: clamp(1.25rem, 3svh, 2.5rem); }
+  .counter.is-pinned .counter__title { font-size: min(clamp(2.2rem, 1.3rem + 3vw, 4.4rem), 7svh); }
+  .counter.is-pinned .plate__btn { padding-block: clamp(0.4rem, 1.15svh, 0.85rem); }
+  .counter.is-pinned .plate__name { font-size: min(clamp(1.5rem, 1rem + 1.2vw, 2.25rem), 3.9svh); }
+  .counter.is-pinned .plate__desc { padding-bottom: clamp(0.5rem, 1.4svh, 1rem); }
+  .counter.is-pinned .counter__stage { justify-items: end; gap: 1rem; }
   .counter.is-pinned .counter__frame,
-  .counter.is-pinned .counter__controls { width: min(100%, calc((100svh - var(--nav-h) - 8rem) * 0.8)); }
+  .counter.is-pinned .counter__controls { width: min(100%, calc((100svh - var(--nav-h) - var(--pad-t) - var(--pad-b) - 4rem) * 0.8)); }
 }
 @media (max-width: 960px) {
   .counter__pin { grid-template-columns: 1fr; }
@@ -221,6 +232,8 @@ html:not(.js) .counter__controls { display: none; }
 html.motion:not(.motion-ready) :is([data-split], [data-reveal], [data-reveal-item], [data-hero-word]) {
   opacity: 0; animation: lc-show 0.01s linear 2.5s forwards;
 }
+/* The reveal pre-scales the photo inside its clip; keep that scale out of the page's scrollable width. */
+[data-image-reveal] { overflow: hidden; }
 html.motion:not(.motion-ready) :is([data-image-reveal], [data-hero-photo], [data-hero-cutout]) {
   clip-path: inset(100% 0 0 0); animation: lc-unclip 0.01s linear 2.5s forwards;
 }

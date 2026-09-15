@@ -62,3 +62,23 @@ markup, and remains the experience under reduced motion or WebGL failure.
 - Reviews: the three quotes displayed on the existing homepage.
 - Story facts: "Mi Casa Es Su Casa" post on lennyscasita.com/blog.
 - Fonts: Fontsource (OFL).
+- Owner-supplied media (September 2026, Documents/Lenny'sCasita): Chef Lenny portrait, steak frites, the five Shabbat
+  Shuk dish photos, a catering platter photo, and two reels saved from the restaurant's Instagram
+  (cateringlenny.mp4, worldcuplenny.mp4). Photo crops only remove screenshot artifacts (a lens button, an avatar
+  badge, a 5px dark top edge on the steak frites photo); nothing is upscaled.
+  The films are trimmed without re-encoding: catering 0–27.7s (before the logo end card), match day 0–12.5s.
+
+## September 2026 refinement
+- **Dine with us**: Chef Lenny's portrait bleeds off the page edge and rises into the empty margin beside the
+  headline, so the spread reads headline, Lenny, story. Phones set it right-bleeding between headline and copy.
+- **The counter**: the owner's six plates (Steak frites replaces the tostada). The pinned scene sizes its spacing,
+  type and 4:5 frame from the viewport height, so it is exactly one screen and the controls never clip.
+- **Shabbat Shuk**: the panel is untouched. On desktop the section is anchored with CSS sticky (no GSAP pin) and
+  scroll cross-fades five dishes, each with photo, name, description and price; a rail jumps between them.
+  Phones, tablets, short screens and reduced motion get every dish in normal flow.
+- **Cultura**: one composed desktop screen. Beside the untouched copy, a constrained grid: the catering reel and the
+  match-day reel side by side on top (42%), a wide crop of the catering board below (58%). The copy sets the row
+  height and the grid (size-contained) fills exactly that, so neither column runs past the other; short screens let
+  the section grow instead of clipping. Posters are the films' first frames. Films load only when the section is
+  near, pause when it leaves or the tab hides, and wait for the Play button under reduced motion or Save-Data.
+  Tablets and phones stack normally; phones play the catering reel only.
