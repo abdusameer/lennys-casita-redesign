@@ -561,10 +561,11 @@ function initCultura() {
 }
 
 boot(() => {
+  // Scenes in page order: the Shabbat Shuk now follows the film directly.
   initFilm();
+  initShuk();
   initCounter();
   initBarDrift();
   initPours();
-  initShuk();
   initCultura();
 });

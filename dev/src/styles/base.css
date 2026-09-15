@@ -11,13 +11,20 @@
   --cream: #f5f1e8;
   --cream-2: rgba(245, 241, 232, 0.74);
   --cream-line: rgba(245, 241, 232, 0.18);
-  --onion: #e5487f;
-  --onion-hi: #f06a98;
+  /* Accent: acid green. Kept the token names (--onion/--onion-hi) rather than renaming every call site;
+     the September 2026 pass replaced the bright pink these held (#e5487f/#f06a98) site-wide.
+     Acid green is bright, so it is a fill (with ink text) and a foreground on dark sections only.
+     --accent-fg is the accent to draw with on the current background: deep acid on light paper
+     (the default, since the page ground is paper), full acid inside dark sections (set below). */
+  --onion: #adf236;
+  --onion-hi: #c7fb60;
+  --onion-deep: #3f6b0b;
+  --accent-fg: var(--onion-deep);
 
-  /* Glass: tile-green frost with a pink-to-green edge. Solid fallback where blur is unsupported. */
+  /* Glass: tile-green frost with an acid-to-mint edge. Solid fallback where blur is unsupported. */
   --glass-fill: rgba(10, 48, 31, 0.5);
   --glass-fill-strong: rgba(10, 48, 31, 0.94);
-  --glass-edge: linear-gradient(135deg, rgba(229, 72, 127, 0.8) 0%, rgba(229, 72, 127, 0.16) 36%, rgba(126, 227, 164, 0.12) 64%, rgba(126, 227, 164, 0.62) 100%);
+  --glass-edge: linear-gradient(135deg, rgba(173, 242, 54, 0.8) 0%, rgba(173, 242, 54, 0.16) 36%, rgba(126, 227, 164, 0.12) 64%, rgba(126, 227, 164, 0.62) 100%);
 
   /* After dark: the bar, cocktails and night chapters. */
   --night: #0b0d0b;
@@ -27,7 +34,7 @@
   --oxblood: #6e2b26;
   --blush: #ffc4d8;
 
-  --f-sign: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+  --f-sign: "Bebas Neue", "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
   --f-soft: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
   --f-text: "Hanken Grotesk Variable", "Helvetica Neue", Arial, sans-serif;
 
@@ -50,6 +57,9 @@ body {
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  /* Bebas Neue ships one weight; never let the browser fake a bold of it. Fraunces and Hanken Grotesk are
+     variable fonts with real weights, so this only stops smeared display type. Italic synthesis stays on. */
+  font-synthesis: style;
 }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
@@ -71,7 +81,10 @@ ul, ol { padding: 0; list-style: none; }
 }
 .skip:focus { top: 1rem; }
 
-:focus-visible { outline: 2px solid var(--onion); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent-fg); outline-offset: 3px; }
+/* Dark grounds draw with full acid green; paper grounds keep the deep variant from :root. */
+.nav, .drawer, .dd__panel, .quickbar, .film, .counter, .pours, .shuk, .visit, .footer,
+.chapter--tile, .chapter--night, .chapter--happy { --accent-fg: var(--onion); }
 
 .icon { display: inline-flex; width: 1.15em; height: 1.15em; flex: none; }
 .icon svg { width: 100%; height: 100%; }
@@ -223,7 +236,8 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
 }
 .status__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cream-2); }
 .status.is-open .status__dot { background: #7ee3a4; box-shadow: 0 0 0 4px rgba(126, 227, 164, 0.18); }
-.status.is-closed .status__dot { background: var(--onion); }
+/* Deliberately not the new accent green: it would read as "open" right next to the open dot. */
+.status.is-closed .status__dot { background: var(--brass); }
 
 .nav__toggle {
   display: none; width: 44px; height: 44px; border: 1px solid var(--cream-line); border-radius: 50%;

@@ -57,7 +57,7 @@
 .item__price small { font-family: var(--f-text); font-weight: 500; font-size: 0.55em; opacity: 0.75; }
 .item__price output { font: inherit; }
 .item__desc { max-width: 38rem; font-size: 0.98rem; color: var(--ink-2); }
-.item:target, .vessel:target, .board:target { box-shadow: inset 4px 0 0 var(--onion); padding-left: 1rem; }
+.item:target, .vessel:target, .board:target { box-shadow: inset 4px 0 0 var(--accent-fg); padding-left: 1rem; }
 :is(.chapter--tile, .chapter--night, .chapter--happy) .item { border-color: var(--cream-line); }
 :is(.chapter--tile, .chapter--night, .chapter--happy) .item__desc { color: var(--cream-2); }
 
@@ -128,13 +128,13 @@ abbr.tag { cursor: help; }
 .proteins__legend { float: left; width: 100%; margin-bottom: 0.5rem; padding: 0; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wood); }
 .protein { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.75rem; padding: 0.7rem 0.8rem; border-radius: 12px; cursor: pointer; transition: background-color 0.25s var(--ease), color 0.25s var(--ease); }
 .protein:hover { background: var(--counter-2); }
-.protein input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--onion); }
+.protein input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--accent-fg); }
 .protein__name { font-family: var(--f-sign); font-weight: 800; text-transform: uppercase; font-size: 1.35rem; line-height: 1; }
 .protein__name em { display: block; margin-top: 0.15rem; font-family: var(--f-soft); font-weight: 400; font-size: 0.95rem; text-transform: none; color: var(--ink-2); }
 .protein__add { font-family: var(--f-sign); font-weight: 800; font-size: 1.35rem; }
 .protein:has(input:checked) { background: var(--tile); color: var(--cream); }
 .protein:has(input:checked) .protein__name em { color: var(--cream-2); }
-.protein:has(input:focus-visible) { outline: 2px solid var(--onion); outline-offset: 2px; }
+.protein:has(input:focus-visible) { outline: 2px solid var(--accent-fg); outline-offset: 2px; }
 .vessels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .builder__summary { grid-column: 1 / -1; min-height: 1.6em; font-weight: 600; color: var(--tile); }
 .vessel { display: grid; align-content: start; gap: 0.5rem; padding: 1.25rem; border: 1px solid var(--grout); border-radius: 20px; background: var(--counter); }
@@ -143,7 +143,7 @@ abbr.tag { cursor: help; }
 .vessel__photo { margin: 0; }
 .vessel__photo img { width: 100%; height: 100%; min-height: 14rem; max-height: 22rem; object-fit: cover; object-position: 50% 70%; border-radius: 20px; }
 .vessel__photo figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--ink-2); }
-@keyframes lc-pop { 0% { color: var(--onion); transform: translateY(-4px); } 100% { color: inherit; transform: none; } }
+@keyframes lc-pop { 0% { color: var(--accent-fg); transform: translateY(-4px); } 100% { color: inherit; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .vessel.is-updated .item__price { animation: none; } }
 @media (max-width: 900px) {
   .builder { grid-template-columns: 1fr; }
@@ -157,14 +157,15 @@ abbr.tag { cursor: help; }
 /* ---------- 04 boards ---------- */
 .boards { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
 .board { display: grid; align-content: start; gap: 0.75rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--grout); border-radius: 24px; background: var(--counter-2); }
-.board--feature { grid-column: 1 / span 7; border: 0; background: var(--tile); color: var(--cream); }
+/* A dark card on a paper chapter: its accent text draws in full acid, not the paper-safe deep green. */
+.board--feature { grid-column: 1 / span 7; border: 0; background: var(--tile); color: var(--cream); --accent-fg: var(--onion); }
 .board__photo { grid-column: 8 / -1; grid-row: span 2; margin: 0; }
 .board__photo img { width: 100%; height: 100%; min-height: 22rem; object-fit: cover; border-radius: 24px; }
 .board__photo figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--ink-2); }
 .board--asada { grid-column: 1 / span 4; }
 .board--gaucho { grid-column: 5 / span 3; }
 .board__serves { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--wood); }
-.board--feature .board__serves { color: var(--onion-hi); }
+.board--feature .board__serves { color: var(--accent-fg); }
 .board__name { font-family: var(--f-sign); font-weight: 900; text-transform: uppercase; font-size: clamp(1.9rem, 1.3rem + 1.6vw, 3.1rem); line-height: 0.95; }
 .board__price { font-family: var(--f-sign); font-weight: 900; font-size: clamp(1.9rem, 1.3rem + 1.6vw, 3.1rem); line-height: 1; white-space: nowrap; }
 .board__contents { display: flex; flex-wrap: wrap; gap: 0.45rem; }

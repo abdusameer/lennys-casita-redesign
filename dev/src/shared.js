@@ -1,7 +1,6 @@
 // Shared site runtime: fonts, smooth scroll, nav, live hours, hero intro and section reveals.
 // Each page entry imports this, adds its own scenes, then calls boot().
-import "@fontsource/big-shoulders-display/800";
-import "@fontsource/big-shoulders-display/900";
+import "@fontsource/bebas-neue/400.css";
 import "@fontsource-variable/fraunces/full.css";
 import "@fontsource-variable/fraunces/full-italic.css";
 import "@fontsource-variable/hanken-grotesk/wght.css";

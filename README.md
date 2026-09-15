@@ -24,7 +24,7 @@ assets/
     food/                      Dish photography (food/shabbat/: the five Shabbat Shuk dishes)
     cocktails/                 Cocktail photography + Cesar Mateo portrait
     story/                     Chef Lenny portraits + "takeout years" photo
-    gallery/cultura/           Catering platter photo + first-frame posters for the Cultura films
+    gallery/cultura/           Catering board (hugeplatter) + first-frame posters for the Cultura films
     backgrounds/               Green-tile texture used behind glass panels
   video/                       Self-hosted Cultura films (H.264 MP4, muted loops, no audio played)
 dev/                          The original Vite source project (for future edits — see below)

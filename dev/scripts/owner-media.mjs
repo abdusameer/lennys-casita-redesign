@@ -1,4 +1,5 @@
-// Web versions of the owner-supplied photos (Documents/Lenny'sCasita, September 2026).
+// Web versions of the owner-supplied photos (Documents/Lenny'sCasita, September 2026; the Shabbat set and
+// hugeplatter were re-supplied on September 15 as clean studio shots).
 // Usage: node scripts/owner-media.mjs <source-dir>
 // Crops only remove screenshot artifacts (a lens button, an avatar badge, a dark top edge); nothing is upscaled.
 import sharp from "sharp";
@@ -15,12 +16,12 @@ const photos = [
   // [source file, output name, crop (left, top, width, height) or null]
   ["lenny.png", "story/lenny-portrait", null],
   ["streakfrites.png", "food/steak-frites", { left: 0, top: 6, width: 542, height: 544 }],
-  ["roastedjalapeno.png", "shuk/roasted-jalapeno", { left: 0, top: 0, width: 1170, height: 1010 }],
+  ["roastedjalapeno.png", "shuk/roasted-jalapeno", null],
   ["eggplantshuk.png", "shuk/eggplant-shuk", null],
-  ["trufflebabgonosh.png", "shuk/truffle-babaganoush", { left: 0, top: 0, width: 1170, height: 1310 }],
+  ["trufflebabgonosh.png", "shuk/truffle-babaganoush", null],
   ["shuk shallat.png", "shuk/shuk-salat", null],
   ["wagyuhoneybrasiedrid.png", "shuk/wagyu-short-rib", null],
-  ["05acadbc-5a9e-4e5a-be52-b5da300c7e38.png", "cultura/platter", null],
+  ["hugeplatter.png", "cultura/hugeplatter", null],
 ];
 
 for (const [file, name, crop] of photos) {
