@@ -215,6 +215,11 @@ html:not(.js) .counter__controls { display: none; }
 .footer__fine { grid-column: 1 / -1; color: var(--cream-2); font-size: 0.85rem; }
 @media (max-width: 760px) { .footer__bottom { grid-template-columns: 1fr; } }
 
+/* ---------- image reveals ----------
+   shared.js starts each image at scale 1.14. The figure's clip-path hides the excess but still lets it
+   widen the page, so clip the sides as well (vertical overflow stays visible). */
+[data-image-reveal] { overflow-x: clip; }
+
 /* ---------- motion pre-states ----------
    Hidden only between first paint and the module taking over (.motion-ready).
    If the script never runs, a delayed keyframe reveals everything. */
