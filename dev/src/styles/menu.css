@@ -32,9 +32,10 @@
 .chapter--night { background: var(--night); color: var(--cream); }
 .chapter--happy { background: var(--oxblood); color: var(--cream); }
 :is(.chapter--tile, .chapter--night, .chapter--happy) .chapter__note { color: var(--cream-2); }
-.chapter--tile .chapter__kicker { color: var(--onion-hi); }
+.chapter--tile .chapter__kicker { color: var(--color-accent-soft); }
 .chapter--night .chapter__kicker { color: var(--brass); }
-.chapter--happy .chapter__kicker { color: var(--blush); }
+/* Happy hour keeps its oxblood with aged-brass details, so the Kelly accent stays special. */
+.chapter--happy .chapter__kicker { color: var(--brass); }
 @media (min-width: 1100px) {
   .chapter { padding-left: max(var(--gutter), 7rem); scroll-margin-top: 0; }
 }
@@ -64,9 +65,9 @@
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
 .tag { display: inline-block; padding: 0.1rem 0.5rem; border: 1px solid currentColor; border-radius: 999px; font-family: var(--f-text); font-size: 0.7rem; font-weight: 700; font-style: normal; letter-spacing: 0.06em; line-height: 1.45; color: var(--wood); text-decoration: none; vertical-align: middle; }
 abbr.tag { cursor: help; }
-.chapter--tile .tag { color: #9deaba; }
+.chapter--tile .tag { color: var(--color-accent-soft); }
 .chapter--night .tag { color: var(--brass); }
-.chapter--happy .tag { color: var(--blush); }
+.chapter--happy .tag { color: var(--brass); }
 
 /* ---------- split layout ---------- */
 .split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
@@ -110,7 +111,7 @@ abbr.tag { cursor: help; }
 .taco__meaning { font-family: var(--f-soft); font-style: italic; font-size: 1.25rem; color: var(--cream-2); }
 .taco__desc { min-height: 3.2em; color: var(--cream-2); }
 .taco__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--cream-line); }
-.taco__price { font-family: var(--f-sign); font-weight: 900; font-size: 3.5rem; line-height: 0.85; color: var(--onion-hi); }
+.taco__price { font-family: var(--f-sign); font-weight: 900; font-size: 3.5rem; line-height: 0.85; color: var(--color-accent-soft); }
 .taco--three .taco__name { font-size: clamp(2rem, 1.6rem + 1vw, 2.6rem); }
 .taco--photo { padding: 0; overflow: hidden; }
 .taco--photo img { width: 100%; height: 13rem; object-fit: cover; object-position: 50% 72%; }
@@ -157,8 +158,8 @@ abbr.tag { cursor: help; }
 /* ---------- 04 boards ---------- */
 .boards { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
 .board { display: grid; align-content: start; gap: 0.75rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--grout); border-radius: 24px; background: var(--counter-2); }
-/* A dark card on a paper chapter: its accent text draws in full acid, not the paper-safe deep green. */
-.board--feature { grid-column: 1 / span 7; border: 0; background: var(--tile); color: var(--cream); --accent-fg: var(--onion); }
+/* A dark card on a paper chapter: its accent text draws in the soft tone, not the paper-safe deep one. */
+.board--feature { grid-column: 1 / span 7; border: 0; background: var(--tile); color: var(--cream); --accent-fg: var(--color-accent-soft); }
 .board__photo { grid-column: 8 / -1; grid-row: span 2; margin: 0; }
 .board__photo img { width: 100%; height: 100%; min-height: 22rem; object-fit: cover; border-radius: 24px; }
 .board__photo figcaption { margin-top: 0.5rem; font-size: 0.85rem; color: var(--ink-2); }
@@ -230,13 +231,13 @@ abbr.tag { cursor: help; }
 /* ---------- 10 happy hour ---------- */
 .happy { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 4rem); margin-bottom: clamp(3rem, 6vw, 4.5rem); }
 .happy__sig { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2rem; align-items: center; }
-.happy__big { font-family: var(--f-sign); font-weight: 900; font-size: clamp(7rem, 4.5rem + 8vw, 13rem); line-height: 0.8; color: var(--blush); }
+.happy__big { font-family: var(--f-sign); font-weight: 900; font-size: clamp(7rem, 4.5rem + 8vw, 13rem); line-height: 0.8; color: var(--brass); }
 .happy__sig-title { font-family: var(--f-soft); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 1.2rem + 1vw, 2.2rem); margin-bottom: 0.6rem; }
 .happy__names { display: flex; flex-wrap: wrap; gap: 0.1rem 0.9rem; font-family: var(--f-sign); font-weight: 800; text-transform: uppercase; font-size: clamp(1.4rem, 1.1rem + 0.9vw, 2.1rem); line-height: 1.12; }
-.happy__names li:not(:last-child)::after { content: "·"; margin-left: 0.9rem; color: var(--blush); }
+.happy__names li:not(:last-child)::after { content: "·"; margin-left: 0.9rem; color: var(--brass); }
 .happy__deals { display: grid; gap: 1rem; }
-.deal { padding: 1.25rem 1.4rem; border: 1px solid rgba(255, 196, 216, 0.35); border-radius: 20px; }
-.deal__title { margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blush); }
+.deal { padding: 1.25rem 1.4rem; border: 1px solid var(--brass-line); border-radius: 20px; }
+.deal__title { margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass); }
 .deal__line { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.35rem 0; }
 .deal__line strong { font-family: var(--f-sign); font-weight: 900; font-size: 1.7rem; line-height: 1; white-space: nowrap; }
 .happy__menus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 4.5rem); }
@@ -269,7 +270,7 @@ abbr.tag { cursor: help; }
 .notes__legend dd { margin: 0; color: var(--ink-2); }
 .notes__list { display: grid; gap: 0.5rem; color: var(--ink-2); }
 .notes__list li { position: relative; padding-left: 1.1rem; }
-.notes__list li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: var(--onion); }
+.notes__list li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: var(--accent-fg); }
 .notes__pdfs { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .notes__pdfs a { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; border: 1px solid var(--grout); border-radius: 999px; text-decoration: none; font-weight: 600; transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease); }
 .notes__pdfs a:hover { border-color: var(--ink); background: var(--counter-2); }
@@ -290,7 +291,7 @@ html:not(.nav-hidden) .rail { top: var(--nav-h); }
 .rail__list a:hover { color: var(--cream); }
 .rail__list a.is-active { background: var(--cream); color: var(--tile); }
 .rail__progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(245, 241, 232, 0.12); }
-.rail__progress span { display: block; width: 100%; height: 100%; background: var(--onion); transform-origin: left; transform: scaleX(var(--p, 0)); }
+.rail__progress span { display: block; width: 100%; height: 100%; background: var(--color-accent); transform-origin: left; transform: scaleX(var(--p, 0)); }
 
 @media (min-width: 1100px) {
   .rail {

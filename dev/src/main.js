@@ -213,7 +213,9 @@ function initFilm() {
     gsap
       .timeline({ delay: 0.1, defaults: { ease: "expo.out" } })
       .fromTo(media, { scale: 1.12 }, { scale: 1, duration: 2.4 }, 0)
-      .to(words, { yPercent: 0, duration: 1.1, stagger: 0.06 }, 0.15);
+      .to(words, { yPercent: 0, duration: 1.1, stagger: 0.06 }, 0.15)
+      // The script line's glow resolves once the words have settled, then never moves again.
+      .call(() => section.classList.add("is-lit"), null, 1.2);
 
     if (!navigator.connection?.saveData) {
       const start = () => setTimeout(() => loadVideo(), 300);
@@ -221,6 +223,7 @@ function initFilm() {
       else listen(window, "load", start, { once: true });
     }
   }
+  if (reduceMotion) section.classList.add("is-lit");
   syncToggle();
 }
 
@@ -430,6 +433,131 @@ function initPours() {
   onCleanup(() => mm.revert());
 }
 
+/* ---------------- after dark: light that follows the pointer ---------------- */
+// A faint agave-green light drifts through the sign's negative space, fine pointers only. The soft disc is a
+// fixed-size layer moved with transform from two CSS variables, so movement composites and never repaints.
+// Geometry is read once on entry and on refresh, never while moving; pointer events only store numbers, one rAF
+// applies them, and the loop sleeps as soon as the light and the ampersand have settled.
+function initBarLight() {
+  const section = $("[data-pours]");
+  const intro = section && $(".pours__intro", section);
+  const light = intro && $(".pours__light", intro);
+  if (!light || navigator.connection?.saveData) return;
+  const amp = $(".bar__amp", intro);
+
+  const mm = gsap.matchMedia();
+  mm.add("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
+    section.classList.add("has-light");
+    const target = { x: 0, y: 0 };
+    const current = { x: 0, y: 0 };
+    let box = null;
+    let ampAt = null;
+    let reach = 1;
+    let inside = false;
+    let clientX = 0;
+    let clientY = 0;
+    let frame = 0;
+    let leftAt = -Infinity;
+    let ampTarget = 0;
+    let ampLit = 0;
+
+    const measure = () => {
+      const r = intro.getBoundingClientRect();
+      box = { left: r.left + window.scrollX, top: r.top + window.scrollY, height: r.height };
+      if (amp) {
+        const a = amp.getBoundingClientRect();
+        ampAt = { x: a.left + a.width / 2 - r.left, y: a.top + a.height / 2 - r.top };
+      }
+      // Mirrors the disc size in CSS: clamp(30rem, 52vw, 52rem).
+      reach = Math.min(Math.max(window.innerWidth * 0.52, 480), 832) * 0.42;
+    };
+    const aim = () => {
+      target.x = clientX + window.scrollX - box.left;
+      target.y = clientY + window.scrollY - box.top;
+    };
+    const tick = () => {
+      frame = 0;
+      current.x += (target.x - current.x) * 0.16;
+      current.y += (target.y - current.y) * 0.16;
+      const moving = Math.abs(target.x - current.x) > 0.3 || Math.abs(target.y - current.y) > 0.3;
+      if (!moving) Object.assign(current, target);
+      if (amp) {
+        ampTarget = inside ? Math.max(0, 1 - Math.hypot(current.x - ampAt.x, current.y - ampAt.y) / reach) ** 2 : 0;
+        ampLit += (ampTarget - ampLit) * 0.12;
+      }
+      const glowing = Math.abs(ampTarget - ampLit) > 0.004;
+      if (!glowing) ampLit = ampTarget;
+      light.style.setProperty("--light-x", `${current.x.toFixed(1)}px`);
+      light.style.setProperty("--light-y", `${current.y.toFixed(1)}px`);
+      amp?.style.setProperty("--amp-lit", ampLit.toFixed(3));
+      if (moving || glowing) frame = requestAnimationFrame(tick);
+      else light.dataset.active = "false";
+    };
+    const schedule = () => {
+      if (frame) return;
+      light.dataset.active = "true";
+      frame = requestAnimationFrame(tick);
+    };
+
+    const onEnter = (event) => {
+      if (event.pointerType === "touch") return;
+      measure();
+      inside = true;
+      clientX = event.clientX;
+      clientY = event.clientY;
+      aim();
+      // Arriving after the light has faded out: start under the pointer instead of sweeping in from the last exit.
+      if (performance.now() - leftAt > 900) Object.assign(current, target);
+      light.classList.add("is-on");
+      schedule();
+    };
+    const onMove = (event) => {
+      if (!inside || event.pointerType === "touch") return;
+      clientX = event.clientX;
+      clientY = event.clientY;
+      aim();
+      schedule();
+    };
+    const onLeave = () => {
+      if (!inside) return;
+      inside = false;
+      leftAt = performance.now();
+      light.classList.remove("is-on");
+      schedule();
+    };
+    // The page can scroll under a still pointer: keep the light beneath it, and let go once it is outside the sign.
+    const onScroll = () => {
+      if (!inside) return;
+      aim();
+      if (target.y < 0 || target.y > box.height) return onLeave();
+      schedule();
+    };
+    const onRefresh = () => inside && measure();
+
+    intro.addEventListener("pointerenter", onEnter);
+    intro.addEventListener("pointermove", onMove, { passive: true });
+    intro.addEventListener("pointerleave", onLeave);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    ScrollTrigger.addEventListener("refresh", onRefresh);
+    return () => {
+      intro.removeEventListener("pointerenter", onEnter);
+      intro.removeEventListener("pointermove", onMove);
+      intro.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("scroll", onScroll);
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
+      cancelAnimationFrame(frame);
+      frame = 0;
+      section.classList.remove("has-light");
+      light.classList.remove("is-on");
+      light.style.removeProperty("--light-x");
+      light.style.removeProperty("--light-y");
+      amp?.style.removeProperty("--amp-lit");
+      delete light.dataset.active;
+    };
+  });
+  onCleanup(() => mm.revert());
+}
+
 /* ---------------- anchored scene (Shabbat Shuk) ---------------- */
 // The scene holds the screen with CSS sticky rather than a GSAP pin: the section grows taller and its contents
 // stick until the section ends, so the release is plain native scroll. It only anchors when its copy fits the
@@ -567,5 +695,6 @@ boot(() => {
   initCounter();
   initBarDrift();
   initPours();
+  initBarLight();
   initCultura();
 });

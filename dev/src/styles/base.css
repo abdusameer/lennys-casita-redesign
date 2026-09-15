@@ -11,20 +11,29 @@
   --cream: #f5f1e8;
   --cream-2: rgba(245, 241, 232, 0.74);
   --cream-line: rgba(245, 241, 232, 0.18);
-  /* Accent: acid green. Kept the token names (--onion/--onion-hi) rather than renaming every call site;
-     the September 2026 pass replaced the bright pink these held (#e5487f/#f06a98) site-wide.
-     Acid green is bright, so it is a fill (with ink text) and a foreground on dark sections only.
-     --accent-fg is the accent to draw with on the current background: deep acid on light paper
-     (the default, since the page ground is paper), full acid inside dark sections (set below). */
-  --onion: #adf236;
-  --onion-hi: #c7fb60;
-  --onion-deep: #3f6b0b;
-  --accent-fg: var(--onion-deep);
+  /* Accent: muted Kelly green, the site's single accent family (September 2026; it replaced the pickled-onion pink
+     and then a short-lived acid green). Hue 136° sits between classic Kelly and the tile glaze, held at 44% saturation
+     so it reads rich and a little earthy under warm light rather than fluorescent.
+       --color-accent        solid fills with ink text, progress, marks on dark grounds
+       --color-accent-hover  hover fill, one step lighter
+       --color-accent-soft   text, labels and the hero script on dark grounds
+       --color-accent-deep   text, hairlines and focus rings on paper
+       --color-accent-glow   diffusion for glows and the after-dark light
+       --accent-fg           the accent to draw with here: deep on paper (default), soft inside dark grounds
+     The -rgb triplets exist only to build translucent tints of the same colours. */
+  --color-accent: #3c9a55;
+  --color-accent-hover: #46aa60;
+  --color-accent-soft: #81bb91;
+  --color-accent-deep: #225d32;
+  --color-accent-rgb: 60, 154, 85;
+  --color-accent-soft-rgb: 129, 187, 145;
+  --color-accent-glow: rgba(var(--color-accent-rgb), 0.35);
+  --accent-fg: var(--color-accent-deep);
 
-  /* Glass: tile-green frost with an acid-to-mint edge. Solid fallback where blur is unsupported. */
+  /* Glass: tile-green frost with a Kelly edge. Solid fallback where blur is unsupported. */
   --glass-fill: rgba(10, 48, 31, 0.5);
   --glass-fill-strong: rgba(10, 48, 31, 0.94);
-  --glass-edge: linear-gradient(135deg, rgba(173, 242, 54, 0.8) 0%, rgba(173, 242, 54, 0.16) 36%, rgba(126, 227, 164, 0.12) 64%, rgba(126, 227, 164, 0.62) 100%);
+  --glass-edge: linear-gradient(135deg, rgba(var(--color-accent-rgb), 0.8) 0%, rgba(var(--color-accent-rgb), 0.16) 36%, rgba(var(--color-accent-soft-rgb), 0.12) 64%, rgba(var(--color-accent-soft-rgb), 0.55) 100%);
 
   /* After dark: the bar, cocktails and night chapters. */
   --night: #0b0d0b;
@@ -32,7 +41,6 @@
   --brass: #c9a86b;
   --brass-line: rgba(201, 168, 107, 0.32);
   --oxblood: #6e2b26;
-  --blush: #ffc4d8;
 
   --f-sign: "Bebas Neue", "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
   --f-soft: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
@@ -76,15 +84,18 @@ ul, ol { padding: 0; list-style: none; }
 }
 .skip {
   position: fixed; left: 1rem; top: -4rem; z-index: 100;
-  background: var(--onion); color: var(--ink); padding: 0.75rem 1rem;
+  background: var(--color-accent); color: var(--ink); padding: 0.75rem 1rem;
   font-weight: 600; text-decoration: none; transition: top 0.2s var(--ease);
 }
 .skip:focus { top: 1rem; }
 
 :focus-visible { outline: 2px solid var(--accent-fg); outline-offset: 3px; }
-/* Dark grounds draw with full acid green; paper grounds keep the deep variant from :root. */
-.nav, .drawer, .dd__panel, .quickbar, .film, .counter, .pours, .shuk, .visit, .footer,
-.chapter--tile, .chapter--night, .chapter--happy { --accent-fg: var(--onion); }
+/* Dark grounds (and dark cards or states on paper) draw the accent in its soft tone; paper keeps the deep tone. */
+.nav, .drawer, .dd__panel, .quickbar, .film, .hero, .counter, .pours, .shuk, .visit, .footer, .rail, .cultura__toggle,
+.chapter--tile, .chapter--night, .chapter--happy { --accent-fg: var(--color-accent-soft); }
+/* Glass bars and the control over the Cultura films sit on changing backdrops (night one moment, paper the next):
+   a dark inner band under the ring keeps the indicator clear on any ground. */
+.nav :focus-visible, .quickbar :focus-visible, .cultura__toggle:focus-visible { box-shadow: 0 0 0 3px rgba(8, 10, 8, 0.85); }
 
 .icon { display: inline-flex; width: 1.15em; height: 1.15em; flex: none; }
 .icon svg { width: 100%; height: 100%; }
@@ -122,7 +133,7 @@ ul, ol { padding: 0; list-style: none; }
   text-transform: uppercase;
   color: var(--wood);
 }
-.label--light { color: var(--onion-hi); }
+.label--light { color: var(--color-accent-soft); }
 
 /* ---------- split words ---------- */
 .w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
@@ -140,8 +151,12 @@ ul, ol { padding: 0; list-style: none; }
 .btn .icon { transition: transform 0.35s var(--ease); }
 .btn:hover .icon, .btn:focus-visible .icon { transform: translate(2px, -2px); }
 .btn:active { transform: translateY(1px); }
-.btn--onion { background: var(--onion); color: var(--ink); }
-.btn--onion:hover { background: var(--onion-hi); }
+/* Primary action: the strongest solid Kelly. Hover lifts one step and shows a fine edge highlight; no scale, no glow. */
+.btn--accent {
+  background: var(--color-accent); color: var(--ink);
+  transition-property: background-color, color, border-color, transform, box-shadow; transition-duration: 0.22s;
+}
+.btn--accent:hover { background: var(--color-accent-hover); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(var(--color-accent-soft-rgb), 0.3); }
 .btn--ghost-light { color: var(--cream); border-color: var(--cream-line); }
 .btn--ghost-light:hover { border-color: var(--cream); background: rgba(245, 241, 232, 0.06); }
 .btn--sm { min-height: 2.5rem; padding: 0.55rem 1rem; font-size: 0.9rem; }
@@ -204,7 +219,7 @@ ul, ol { padding: 0; list-style: none; }
   width: min(38rem, calc(100vw - 2 * var(--gutter)));
   display: grid; grid-template-columns: minmax(0, 1fr) 12rem; gap: 1.25rem;
   padding: 1.25rem 1.25rem 1.25rem 1.5rem;
-  --glass-radius: 24px; background: rgba(8, 37, 23, 0.8);
+  --glass-radius: 24px; background: rgba(8, 37, 23, 0.88); /* 0.88 keeps small Kelly labels >= 4.5:1 even over paper */
   opacity: 0; visibility: hidden; transform: translateY(-8px);
   transition: opacity 0.28s var(--ease), transform 0.35s var(--ease), visibility 0s linear 0.35s;
 }
@@ -213,7 +228,7 @@ html:not(.js) .dd:hover .dd__panel,
 html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
 /* Invisible bridge so the pointer can travel from trigger to panel without closing it. */
 .dd__panel::after { content: ""; position: absolute; left: 0; right: 0; top: -1.1rem; height: 1.1rem; }
-.dd__label { margin-bottom: 0.35rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--onion-hi); }
+.dd__label { margin-bottom: 0.35rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-soft); }
 .dd__list a {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: 0.55rem 0; border-bottom: 1px solid var(--cream-line);
@@ -221,7 +236,7 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
   transition: color 0.25s var(--ease), padding 0.35s var(--ease);
 }
 .dd__list li:last-child a { border-bottom: 0; }
-.dd__list a:hover, .dd__list a:focus-visible { color: var(--onion-hi); padding-left: 0.3rem; }
+.dd__list a:hover, .dd__list a:focus-visible { color: var(--color-accent-soft); padding-left: 0.3rem; }
 .dd__list .icon { width: 1rem; height: 1rem; opacity: 0.7; }
 .dd__feature { position: relative; display: block; min-height: 13rem; overflow: hidden; border-radius: 16px; text-decoration: none; isolation: isolate; }
 .dd__feature img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
@@ -235,7 +250,7 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
   padding: 0.45rem 0.85rem; border-radius: 999px; background: var(--tile);
 }
 .status__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cream-2); }
-.status.is-open .status__dot { background: #7ee3a4; box-shadow: 0 0 0 4px rgba(126, 227, 164, 0.18); }
+.status.is-open .status__dot { background: var(--color-accent-soft); box-shadow: 0 0 0 4px rgba(var(--color-accent-soft-rgb), 0.2); }
 /* Deliberately not the new accent green: it would read as "open" right next to the open dot. */
 .status.is-closed .status__dot { background: var(--brass); }
 
@@ -256,7 +271,7 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
 }
 .drawer__links { display: grid; gap: 1.75rem; }
 .drawer__group { display: grid; gap: 0.1rem; }
-.drawer__label { margin-bottom: 0.35rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--onion-hi); }
+.drawer__label { margin-bottom: 0.35rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent-soft); }
 .drawer__group a {
   display: block; font-family: var(--f-sign); font-weight: 800; text-transform: uppercase;
   font-size: clamp(2rem, 9vw, 3.2rem); line-height: 1.08; text-decoration: none;
@@ -295,7 +310,7 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
 .hero__lede { max-width: 30rem; color: var(--cream-2); font-size: 1.1rem; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .hero__supervision { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--cream-2); }
-.hero__supervision .icon { color: var(--onion-hi); width: 1em; height: 1em; }
+.hero__supervision .icon { color: var(--color-accent-soft); width: 1em; height: 1em; }
 
 .hero__stage { position: relative; z-index: 2; min-height: 100%; }
 .hero__photo, .hero__cutout { position: absolute; inset: 0; }
@@ -386,7 +401,7 @@ html:not(.js) .dd:focus-within .dd__panel { opacity: 1; visibility: visible; tra
 }
 
 /* ---------- moving word strip ---------- */
-.strip { overflow: hidden; background: var(--onion); color: var(--ink); }
+.strip { overflow: hidden; background: var(--color-accent); color: var(--ink); }
 .strip__track { display: flex; width: max-content; animation: lc-strip 42s linear infinite; }
 .strip__group { display: flex; flex: none; align-items: center; gap: 2.25rem; padding: 1.05rem 1.125rem; margin: 0; }
 .strip__item { font-family: var(--f-sign); font-weight: 800; text-transform: uppercase; font-size: clamp(1.4rem, 1rem + 1.4vw, 2.4rem); line-height: 1; white-space: nowrap; }

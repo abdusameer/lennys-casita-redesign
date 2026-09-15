@@ -4,7 +4,7 @@
 **The green-tile counter.** Every professional plate photo from the restaurant shares one set:
 bottle-green glazed tile, a white counter, warm wood boards, and a flash of pickled-onion pink.
 The site is built from that room. Deep tile green is the chapter color, counter white is the paper,
-wood is the warm neutral, and acid green is the single primary accent (it replaced the pickled-onion pink in September 2026).
+wood is the warm neutral, and a muted Kelly green is the single primary accent (it replaced the pickled-onion pink in September 2026).
 Type echoes the house sign — a loud condensed street-sign face for LENNY'S, a soft italic serif
 for *casita* — without redrawing the logo.
 
@@ -25,11 +25,10 @@ word layer (bg and cutout stay locked together, so nothing ghosts).
 - `--tile` #0d3b26 deep glaze, `--tile-2` #145a38 glaze highlight, `--tile-ink` #082517
 - `--counter` #f5f1e8 paper, `--grout` #e6dfcf hairlines on paper
 - `--wood` #b0703a warm neutral, `--ink` #16140f text on paper
-- `--onion` #adf236 acid green: primary-action fills (with ink text), active states and progress on dark grounds.
-  `--onion-hi` #c7fb60 hover/highlight; `--onion-deep` #3f6b0b for accent lines and text on paper.
-  `--accent-fg` resolves to the right one per ground (deep on paper, acid inside dark sections) and drives focus rings.
-  Token names kept from the pink era (#e5487f) to avoid touching every call site. The closed-status dot is brass, not
-  green, so it never reads as open.
+- One accent family, muted Kelly green (hue 136°): `--color-accent` #3c9a55 fills (ink text), progress and marks on dark grounds;
+  `--color-accent-hover` #46aa60; `--color-accent-soft` #81bb91 for text, labels and the hero script on dark grounds;
+  `--color-accent-deep` #225d32 for text, hairlines and focus rings on paper; `--color-accent-glow` for diffusion.
+  `--accent-fg` resolves soft or deep per ground and drives focus rings. The closed-status dot is brass so it never reads as open.
 
 ## Section sequence
 1. Nav — logo, Menu / Story / Bar / Visit, live open status, Reserve.
@@ -93,8 +92,8 @@ markup, and remains the experience under reduced motion or WebGL failure.
 ## September 15 update
 - **Type**: Bebas Neue is the display face everywhere `--f-sign` was used; Fraunces stays for the soft italic voice and
   Hanken Grotesk for body and UI text (it already fills the body role, so no second sans was added).
-- **Accent**: acid green replaces pink across buttons, the word strip, labels, dropdown and drawer highlights, active
-  numbers, progress rails, hover and focus states, and the glass edges.
+- **Accent**: pink replaced across buttons, the word strip, labels, dropdown and drawer highlights, active numbers,
+  progress rails, hover and focus states, and the glass edges (first with acid green, then the muted Kelly below).
 - **Order**: the Shabbat Shuk is the first chapter after the film, and first in the Eat & drink dropdown on both pages.
   The film ends on night and the Shuk opens on night before settling into tile-ink, with the tile texture masked in, so
   the two chapters meet without a seam.
@@ -104,3 +103,16 @@ markup, and remains the experience under reduced motion or WebGL failure.
 - **After dark**: six featured cocktails (Spicy Margarita Balagán, Waterpamelon, 616 Gimlet, Carefuleta, Michelada de
   Casita, La Manzana Whiskey Sour), counters 01–06 / 06. The full list stays on the menu page.
 - **Cultura**: only the board image changed, to hugeplatter (1672×941 source, published at 720/1280).
+
+## September 15, second pass
+- **Accent**: one muted Kelly family replaces the acid green and the last pink (the old blush). The happy-hour chapter's
+  blush details became aged brass so green stays special.
+- **Hero**: "a timeless table." stays Fraunces italic as the one expressive exception, now soft Kelly with a tight luminous
+  edge and a faint blurred diffusion behind it. It resolves once after the words rise (the word masks stop clipping then)
+  and never moves again. The Reserve button is the strongest solid Kelly; hover lifts one step with a fine edge in 220ms.
+- **After dark**: on fine pointers a soft Kelly light drifts with the pointer through the Tequila & mezcal negative space.
+  A fixed-size disc moved by transform inside an edge-masked layer, eased by one rAF loop that sleeps when settled;
+  geometry is read on entry and refresh only. The ampersand (now Kelly) brightens slightly as the light nears. The normal
+  cursor stays. Touch, reduced motion and Save-Data get the static composition. Reveals here rise 10px, not word by word.
+- **Link rows**: a Kelly hairline draws in, the arrow steps ~5px, a faint light gathers at the arrow; colour, opacity and
+  transform only (the old padding shift is gone).

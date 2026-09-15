@@ -299,12 +299,14 @@ function initReveals() {
     });
 
   $$("[data-reveal]").forEach((el) => {
-    gsap.set(el, { autoAlpha: 0, y: 28 });
+    // data-reveal="soft": a shorter, quieter rise for editorial chapters (after dark).
+    const soft = el.dataset.reveal === "soft";
+    gsap.set(el, { autoAlpha: 0, y: soft ? 10 : 28 });
     ScrollTrigger.create({
       trigger: el,
       start: "top 88%",
       once: true,
-      onEnter: () => gsap.to(el, { autoAlpha: 1, y: 0, duration: 0.95, delay: 0.15, ease: "power3.out" }),
+      onEnter: () => gsap.to(el, { autoAlpha: 1, y: 0, duration: soft ? 0.8 : 0.95, delay: soft ? 0 : 0.15, ease: "power3.out" }),
     });
   });
 
