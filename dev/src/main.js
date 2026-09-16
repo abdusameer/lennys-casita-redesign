@@ -5,6 +5,33 @@ import "./styles/home.css";
 
 const VIMEO_ORIGIN = "https://player.vimeo.com";
 
+// Waits for a gap between frames. The heavy optional pieces (three.js plate tour, MapLibre map) cost more to
+// start up than to download, so starting them on an idle callback keeps that work out of a scrolling frame.
+const whenIdle = (timeout = 800) =>
+  new Promise((resolve) => (window.requestIdleCallback ? window.requestIdleCallback(() => resolve(), { timeout }) : setTimeout(resolve, 80)));
+
+// Waits until the page has actually stopped moving. Starting a WebGL context or a map costs ~100ms of main
+// thread whatever we do with it, and during a scroll there is no idle time to hide it in — an idle callback
+// just fires on its timeout, mid-flick. Both features degrade gracefully while they wait: the plate tour shows
+// its photographs, the Visit section shows the static map.
+const whenCalm = (maxWait = 4000) =>
+  new Promise((resolve) => {
+    let timer = 0;
+    const done = () => {
+      clearTimeout(timer);
+      clearTimeout(cap);
+      window.removeEventListener("scroll", bump);
+      whenIdle(600).then(resolve);
+    };
+    const bump = () => {
+      clearTimeout(timer);
+      timer = setTimeout(done, 260);
+    };
+    const cap = setTimeout(done, maxWait);
+    timer = setTimeout(done, 260);
+    window.addEventListener("scroll", bump, { passive: true });
+  });
+
 /* ---------------- film: a night at the Casita ---------------- */
 // The restaurant's own Vimeo film is the hero. Scroll moves through five scenes; each scene seeks the
 // film to that moment through Vimeo's postMessage API. The poster stays until the player reports playback.
@@ -120,6 +147,10 @@ function initFilm() {
   const loadVideo = ({ controls = false } = {}) => {
     if (iframe) return;
     const src = new URL(holder.dataset.src);
+    // Cap the stream. Left to itself the player pulls 1080p — about 27MB per 15 seconds — for a film that sits
+    // behind a heavy gradient and shrinks to little over half size once the story starts. 720p looks the same
+    // here for a third fewer bytes and a lighter decode; phones, where the film is small, take 540p.
+    src.searchParams.set("quality", window.innerWidth < 900 ? "540p" : "720p");
     if (controls) {
       src.searchParams.set("background", "0");
       section.classList.add("has-controls");
@@ -447,6 +478,9 @@ function initCounter() {
     async ([entry]) => {
       if (!entry.isIntersecting) return;
       observer.disconnect();
+      // Compiling the shader and uploading six textures is the expensive part, not the download: wait until the
+      // scroll settles, so the cost never lands inside a moving frame. Until then the section shows its photos.
+      await whenCalm(4000);
       const { createCounterGL } = await import("./counter-gl.js");
       gl = await createCounterGL({
         mount: $("[data-counter-gl]", section),
@@ -599,15 +633,20 @@ function initBarLight() {
     };
     const tick = () => {
       frame = 0;
-      current.x += (target.x - current.x) * 0.16;
-      current.y += (target.y - current.y) * 0.16;
-      const moving = Math.abs(target.x - current.x) > 0.3 || Math.abs(target.y - current.y) > 0.3;
+      current.x += (target.x - current.x) * 0.19;
+      current.y += (target.y - current.y) * 0.19;
+      // Snap once the remainder is below what a pixel can show: easing the last fraction of a pixel (or of the
+      // ampersand's glow) only keeps the loop awake for another second with nothing visible changing.
+      const moving = Math.abs(target.x - current.x) > 0.5 || Math.abs(target.y - current.y) > 0.5;
       if (!moving) Object.assign(current, target);
       if (amp) {
         ampTarget = inside ? Math.max(0, 1 - Math.hypot(current.x - ampAt.x, current.y - ampAt.y) / reach) ** 2 : 0;
-        ampLit += (ampTarget - ampLit) * 0.12;
+        // The glow chases a target that is itself derived from the still-moving light, so it is the last thing to
+        // settle. Closing the gap a little faster, and snapping once the remainder is invisible, ends the loop
+        // about a third of a second sooner with the same brightness at rest.
+        ampLit += (ampTarget - ampLit) * 0.16;
       }
-      const glowing = Math.abs(ampTarget - ampLit) > 0.004;
+      const glowing = Math.abs(ampTarget - ampLit) > 0.02;
       if (!glowing) ampLit = ampTarget;
       light.style.setProperty("--light-x", `${current.x.toFixed(1)}px`);
       light.style.setProperty("--light-y", `${current.y.toFixed(1)}px`);
@@ -764,18 +803,26 @@ function initCultura() {
     toggle.classList.toggle("is-paused", !wanted);
     toggleLabel.textContent = wanted ? "Pause videos" : "Play videos";
   };
-  // The same two <video> elements live for the whole visit; they only ever play or pause.
+  // The same two <video> elements live for the whole visit; they only ever play or pause. The side film starts a
+  // beat after the main one so two decoders and two downloads don't spin up in the same frame as the scroll.
+  let sideTimer = 0;
+  const start = (video) => {
+    if (!video.paused) return;
+    video.muted = true;
+    video.play()?.catch((error) => {
+      if (error.name !== "NotAllowedError") return;
+      wanted = false;
+      syncToggle();
+    });
+  };
   const sync = () => {
     const run = wanted && near && !document.hidden;
+    clearTimeout(sideTimer);
     videos.forEach((video) => {
       // Phones play the main film only; the side film keeps its poster.
       if (run && (!phone.matches || video.dataset.culturaVideo === "main")) {
-        video.muted = true;
-        video.play()?.catch((error) => {
-          if (error.name !== "NotAllowedError") return;
-          wanted = false;
-          syncToggle();
-        });
+        if (video.dataset.culturaVideo === "side") sideTimer = setTimeout(() => start(video), 700);
+        else start(video);
       } else if (!video.paused) {
         video.pause();
       }
@@ -806,6 +853,7 @@ function initCultura() {
   listen(phone, "change", sync);
   onCleanup(() => {
     observer.disconnect();
+    clearTimeout(sideTimer);
     videos.forEach((video) => video.pause());
   });
 }
@@ -829,7 +877,10 @@ function initVisitMap() {
     start: "top bottom+=800",
     once: true,
     onEnter: () => {
-      import("./visit-map.js")
+      // Building the map (style, sources, first tiles) is heavier than fetching the chunk, and there is no idle
+      // time inside a scroll: wait until the page stops moving. The static map holds the section meanwhile.
+      whenCalm(5000)
+        .then(() => import("./visit-map.js"))
         .then(({ mountVisitMap }) => {
           if (!disposed) dispose = mountVisitMap(figure);
         })
@@ -846,14 +897,43 @@ function initVisitMap() {
   });
 }
 
+/* ---------------- idle warm-up for the heavy optional chunks ---------------- */
+// three.js (plate tour) and MapLibre (Visit map) are lazy, but evaluating them the moment their section comes
+// near lands a long task in the middle of a scroll. Parse them while the browser is idle instead; mounting still
+// waits for the section, so nothing renders earlier than before.
+function warmLazyChunks() {
+  if (navigator.connection?.saveData) return;
+  const warm = () => {
+    // Well clear of boot: the first second after load is still busy with the film, fonts and the first reveals,
+    // and an idle callback fires inside it. Fetch and parse the chunks after that, so their sections only have
+    // start-up left to do when they arrive.
+    setTimeout(async () => {
+      await whenIdle(3000);
+      if (!reduceMotion && hasWebGL()) import("./counter-gl.js").catch(() => {});
+      await whenIdle(3000);
+      if ("WebGLRenderingContext" in window) import("./visit-map.js").catch(() => {});
+    }, 2500);
+  };
+  if (document.readyState === "complete") warm();
+  else listen(window, "load", warm, { once: true });
+}
+
 boot(() => {
-  // Scenes in page order: the Shabbat Shuk now follows the film directly.
+  // Scenes in page order: the Shabbat Shuk now follows the film directly. The first screen is set up straight
+  // away; everything below the fold is built one frame later, so the longest task of the visit (parsing the
+  // bundle and wiring the scenes) doesn't also hold up the first paint of the film.
   initFilm();
   initShuk();
-  initCounter();
-  initBarDrift();
-  initPours();
-  initBarLight();
-  initCultura();
-  initVisitMap();
+  const rest = () => {
+    initCounter();
+    initBarDrift();
+    initPours();
+    initBarLight();
+    initCultura();
+    initVisitMap();
+    warmLazyChunks();
+    ScrollTrigger.refresh();
+  };
+  if (reduceMotion) rest();
+  else requestAnimationFrame(() => requestAnimationFrame(rest));
 });

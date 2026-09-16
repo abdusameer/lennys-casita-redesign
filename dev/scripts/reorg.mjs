@@ -35,7 +35,7 @@ const copy = (from, to) => {
 const imageDest = (rel) => {
   const file = rel.split("/").pop();
   if (rel === "logo-white.png") return "branding/logo-white.png";
-  if (rel === "tile-wall.webp") return "backgrounds/tile-wall.webp";
+  if (/^tile-wall(-\d+)?\.webp$/.test(rel)) return `backgrounds/${rel}`;
   if (rel.startsWith("film/")) return file.startsWith("celebrate-") ? `gallery/${file}` : `hero/${file}`;
   if (rel.startsWith("cocktails/")) return `cocktails/${file}`;
   if (rel.startsWith("story/") || /^(chef|spread)-/.test(rel)) return `story/${file}`;

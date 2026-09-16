@@ -134,7 +134,8 @@ export async function createCounterGL({ mount, frame, images, onLost }) {
   } catch {
     return null;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  // 1.5 is the point where more backing pixels stop being visible on this frame but keep costing fill rate.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = LinearSRGBColorSpace;
   renderer.setClearColor(0x082517, 1);
 

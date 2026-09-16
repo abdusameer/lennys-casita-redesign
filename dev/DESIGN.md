@@ -138,6 +138,23 @@ hide/show, back/forward-cache restore — ends in the same `reconcile()`; nothin
 - Reduced motion and Save-Data still mean poster plus "Play film"; nothing loads until asked.
 - `data-film-state` (poster | loading | playing | paused | offscreen | hidden | blocked) mirrors the state for testing.
 
+## Performance
+Measured in Chrome under 4x CPU throttling, scrolling each chapter with real wheel events. The design did not
+change; what changed is *when* the expensive work happens.
+
+- **Nothing heavy starts inside a moving frame.** Starting the WebGL plate tour (shader compile, six textures) and
+  building the map (style, sources, first tiles) each cost ~100ms of main thread. They used to run the moment their
+  section came within 800px — mid-scroll, where there is no idle time to hide in, so an idle callback just fires on
+  its timeout. Both now wait for the page to stop moving (`whenCalm`). While they wait, the section shows its
+  photographs and the static map, exactly as it does for anyone without WebGL.
+- **The two lazy chunks are fetched and parsed well after load**, so their sections only have start-up left to do.
+- **The hero film streams 720p** (540p on phones) instead of the 1080p the player picks by default: the same frame
+  behind the same gradient for about a third fewer bytes and a lighter decode.
+- **The two catering films start a beat apart** rather than spinning up two decoders and two downloads in one frame.
+- **No permanent `will-change`** on the ~150 word spans; GSAP promotes them while they actually rise.
+- The pointer light snaps once the remainder drops below a pixel, instead of easing invisibly for another second.
+- The tile wall ships an 800px source alongside the 1600px one; it is decoded three times per page.
+
 ## Visit: the light map
 A light editorial map is the one bright surface in the deep-agave Visit section — address left, map centre, hours right on
 wide screens; address, actions, map, hours, contact links in one column below 1100px.

@@ -137,7 +137,9 @@ ul, ol { padding: 0; list-style: none; }
 
 /* ---------- split words ---------- */
 .w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
-.w { display: inline-block; will-change: transform; }
+/* No permanent will-change: GSAP promotes these while the words actually rise, and holding ~150 composited
+   layers for the whole visit costs memory and compositing for motion that runs once. */
+.w { display: inline-block; }
 
 /* ---------- buttons & links ---------- */
 .btn {
