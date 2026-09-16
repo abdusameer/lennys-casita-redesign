@@ -8,6 +8,7 @@
   <meta name="theme-color" content="#0b0d0b" />
   <link rel="icon" href="assets/images/branding/logo-white.png" />
   <link rel="preload" as="image" href="assets/images/hero/poster.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preconnect" href="https://player.vimeo.com" />
   <script>
     document.documentElement.classList.add("js");
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
@@ -617,15 +618,26 @@
           <p class="label label--light">Visit</p>
           <h2 class="visit__title" id="visit-title"><span data-split>8823 W Pico Blvd</span><span class="visit__city">Los Angeles, CA 90035</span></h2>
           <div class="visit__actions">
-            <a class="btn btn--accent" href="https://www.google.com/maps/search/?api=1&amp;query=8823%20W%20Pico%20Blvd%2C%20Los%20Angeles%2C%20CA%2090035">Get directions <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10.1433C4 5.64588 7.58172 2 12 2C16.4183 2 20 5.64588 20 10.1433C20 14.6055 17.4467 19.8124 13.4629 21.6744C12.5343 22.1085 11.4657 22.1085 10.5371 21.6744C6.55332 19.8124 4 14.6055 4 10.1433Z"/><circle cx="12" cy="10" r="3"/></g></svg></span></a>
+            <a class="btn btn--accent" href="https://www.google.com/maps/dir/?api=1&amp;destination=Lenny%27s%20Casita%2C%208823%20W%20Pico%20Blvd%2C%20Los%20Angeles%2C%20CA%2090035">Get directions <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10.1433C4 5.64588 7.58172 2 12 2C16.4183 2 20 5.64588 20 10.1433C20 14.6055 17.4467 19.8124 13.4629 21.6744C12.5343 22.1085 11.4657 22.1085 10.5371 21.6744C6.55332 19.8124 4 14.6055 4 10.1433Z"/><circle cx="12" cy="10" r="3"/></g></svg></span></a>
             <a class="btn btn--ghost-light" href="tel:+13236775597">(323) 677-5597 <span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M18.6763 19.9631C19.1917 19.9122 19.6399 19.6343 20.0011 19.254L21.4217 17.7584C22.3806 16.7489 22.1102 15.0182 20.8833 14.312L18.9728 13.2123C18.1672 12.7486 17.1858 12.8848 16.5562 13.5477L16.1007 14.0272C16.1007 14.0272 15.0181 15.167 12.0631 12.0559C9.10812 8.94484 10.1907 7.80507 10.1907 7.80507L10.4775 7.50311C11.1841 6.75924 11.2507 5.56497 10.6342 4.6931L9.37326 2.90961C8.61028 1.8305 7.13596 1.68795 6.26145 2.60864L4.69185 4.26114C4.25823 4.71766 3.96765 5.30945 4.00289 5.96594C4.09304 7.64546 4.81072 11.259 8.81536 15.4752C13.0621 19.9462 17.0468 20.1239 18.6763 19.9631Z"/></svg></span></a>
           </div>
           <ul class="visit__contact">
-            <li><a href="mailto:office@lennyscasita.com"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z"/><path stroke-linecap="round" d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908L18 8"/></g></svg></span>office@lennyscasita.com</a></li>
-            <li><a href="https://www.lennyscasita.com/hiring/">We're hiring</a></li>
-            <li><a href="https://www.lennyscasita.com/contact/">Contact</a></li>
+            <li><a class="visit__link" href="mailto:office@lennyscasita.com"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12C22 15.7712 22 17.6569 20.8284 18.8284C19.6569 20 17.7712 20 14 20H10C6.22876 20 4.34315 20 3.17157 18.8284C2 17.6569 2 15.7712 2 12Z"/><path stroke-linecap="round" d="M6 8L8.1589 9.79908C9.99553 11.3296 10.9139 12.0949 12 12.0949C13.0861 12.0949 14.0045 11.3296 15.8411 9.79908L18 8"/></g></svg></span>office@lennyscasita.com</a></li>
+            <li><a class="visit__link" href="https://www.lennyscasita.com/hiring/">We're hiring <span class="icon visit__go" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a></li>
+            <li><a class="visit__link" href="https://www.lennyscasita.com/contact/">Contact <span class="icon visit__go" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a></li>
           </ul>
         </div>
+        <!-- Light map: static image first; the live MapLibre map (OpenFreeMap tiles) fades in over it once rendered. -->
+        <figure class="visit__map" data-visit-map data-map-style="assets/map/casita-light.json" data-lng="-118.384178" data-lat="34.054914">
+          <div class="visit__map-frame">
+            <img class="visit__map-still" src="assets/images/location/map-1120.webp" srcset="assets/images/location/map-640.webp 640w, assets/images/location/map-1120.webp 1120w" sizes="(min-width: 1100px) 30vw, 92vw" width="1120" height="1120" alt="Street map of W Pico Blvd in Los Angeles with Lenny's Casita marked at 8823 W Pico Blvd" loading="lazy" decoding="async" />
+            <div class="visit__map-canvas" data-map-canvas></div>
+          </div>
+          <figcaption class="visit__map-bar">
+            <a class="visit__link" href="https://www.google.com/maps/search/?api=1&amp;query=Lenny%27s%20Casita%2C%208823%20W%20Pico%20Blvd%2C%20Los%20Angeles%2C%20CA%2090035">Open in Google Maps <span class="icon visit__go" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9"/></svg></span></a>
+            <span class="visit__map-credit"><a href="https://openfreemap.org/">OpenFreeMap</a> © <a href="https://www.openmaptiles.org/">OpenMapTiles</a> · Data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a></span>
+          </figcaption>
+        </figure>
         <div class="hours glass glass-edge" data-hours>
           <h3 class="hours__title"><span class="icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8V12L14.5 14.5"/></g></svg></span> Hours</h3>
           <p class="hours__status" data-hours-status>Pacific time</p>

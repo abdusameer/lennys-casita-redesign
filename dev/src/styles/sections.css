@@ -208,20 +208,109 @@ html:not(.js) .counter__controls { display: none; }
 .visit__title { font-family: var(--f-sign); font-weight: 900; text-transform: uppercase; font-size: clamp(3rem, 1.5rem + 6vw, 7.5rem); line-height: 0.9; display: grid; }
 .visit__city { font-family: var(--f-soft); font-style: italic; font-weight: 350; text-transform: none; font-size: clamp(1.5rem, 1rem + 1.5vw, 2.4rem); line-height: 1.2; color: var(--cream-2); margin-top: 0.5rem; font-variation-settings: "SOFT" 100; }
 .visit__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-.visit__contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; }
-.visit__contact a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--cream-2); text-decoration-color: var(--cream-line); text-underline-offset: 0.25em; }
-.visit__contact a:hover { color: var(--cream); }
+.visit__contact { display: flex; flex-wrap: wrap; gap: 0.25rem 1.75rem; }
+/* Contact and map links: a hairline that fills with Kelly from the left, a small luminance lift, a 3px arrow nudge. */
+.visit__link {
+  position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding-block: 0.35rem;
+  color: var(--cream-2); text-decoration: none; transition: color 0.22s var(--ease);
+}
+.visit__link::before, .visit__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0.1rem; height: 1px; pointer-events: none; }
+.visit__link:has(> .icon:first-child)::before, .visit__link:has(> .icon:first-child)::after { left: calc(1em + 0.5rem); }
+.visit__link::before { background: var(--cream-line); }
+.visit__link::after { background: var(--color-accent-soft); transform: scaleX(0); transform-origin: left; transition: transform 0.26s var(--ease); }
+.visit__link:hover, .visit__link:focus-visible { color: var(--cream); }
+.visit__link:hover::after, .visit__link:focus-visible::after { transform: scaleX(1); }
+.visit__go { width: 0.9em; height: 0.9em; margin-left: -0.15rem; transition: transform 0.22s var(--ease); }
+.visit__link:hover .visit__go, .visit__link:focus-visible .visit__go { transform: translate(3px, -3px); }
+
+/* Light map: the one bright surface in the section. Warm bone paper, sage streets, pale Kelly parks, agave labels. */
+.visit__map { --map-paper: #efe9dc; margin: 0; display: grid; gap: 0.6rem; min-width: 0; align-self: start; }
+.visit__map-frame {
+  position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 4 / 5;
+  border-radius: 22px; background: var(--map-paper); border: 1px solid rgba(245, 241, 232, 0.2);
+  box-shadow: 0 30px 60px -24px rgba(2, 12, 7, 0.6);
+  --accent-fg: var(--color-accent-deep);
+}
+.visit__map-frame::after {
+  content: ""; position: absolute; inset: 0; z-index: 3; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(8, 37, 23, 0.1), inset 0 0 48px rgba(8, 37, 23, 0.09);
+}
+.visit__map-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Explicit size, not just inset: MapLibre measures this element on construction and would keep a 400x300
+   fallback canvas if it ever read a zero height. */
+.visit__map-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s var(--ease); }
+.visit__map[data-map-state="ready"] .visit__map-canvas { opacity: 1; }
+.visit__map-bar { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; }
+.visit__map-credit { font-size: 0.72rem; color: rgba(245, 241, 232, 0.6); }
+.visit__map-credit a { color: inherit; text-decoration-color: rgba(245, 241, 232, 0.25); text-underline-offset: 0.2em; }
+.visit__map-credit a:hover { color: var(--cream); }
+.visit__map .maplibregl-canvas:focus-visible { outline: 2px solid var(--color-accent-deep); outline-offset: -4px; }
+.visit__map .maplibregl-ctrl-top-right { top: 0.35rem; right: 0.35rem; }
+.visit__map .maplibregl-ctrl-group {
+  background: rgba(245, 241, 232, 0.94); border: 1px solid rgba(8, 37, 23, 0.18); border-radius: 12px; box-shadow: none; overflow: hidden;
+}
+.visit__map .maplibregl-ctrl-group button { width: 34px; height: 34px; }
+.visit__map .maplibregl-ctrl-group button + button { border-top-color: rgba(8, 37, 23, 0.14); }
+.visit__map .maplibregl-ctrl-group button:not(:disabled):hover { background-color: rgba(var(--color-accent-rgb), 0.1); }
+.visit__map .maplibregl-ctrl-group button:focus-visible { outline: 2px solid var(--color-accent-deep); outline-offset: -3px; }
+.visit__map .maplibregl-cooperative-gesture-screen {
+  background: rgba(8, 37, 23, 0.72); color: var(--cream); font: 500 0.95rem/1.4 var(--f-text, inherit); padding: 1rem; border-radius: inherit;
+}
+/* Marker (built in visit-map.js) */
+.map-pin { position: relative; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: none; cursor: pointer; }
+.map-pin__dot {
+  width: 16px; height: 16px; border-radius: 50%; background: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--map-paper), 0 0 0 10px rgba(var(--color-accent-rgb), 0.16), 0 6px 14px rgba(8, 37, 23, 0.32);
+  transition: box-shadow 0.24s var(--ease);
+}
+.map-pin:hover .map-pin__dot, .map-pin[aria-expanded="true"] .map-pin__dot {
+  box-shadow: 0 0 0 3px var(--map-paper), 0 0 0 12px rgba(var(--color-accent-rgb), 0.22), 0 6px 14px rgba(8, 37, 23, 0.32);
+}
+.map-pin__label {
+  position: absolute; left: 50%; bottom: calc(100% - 2px); display: grid; gap: 0.1rem; padding: 0.55rem 0.8rem 0.6rem;
+  white-space: nowrap; text-align: left; font-size: 0.8rem; line-height: 1.3; color: var(--cream-2);
+  background: var(--tile-ink); border: 1px solid rgba(245, 241, 232, 0.16); border-radius: 10px; box-shadow: 0 12px 28px -10px rgba(8, 37, 23, 0.55);
+  opacity: 0; visibility: hidden; transform: translate(-50%, 4px);
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease), visibility 0s linear 0.22s;
+}
+.map-pin__label strong { font-family: var(--f-sign); font-weight: 400; font-size: 1.15rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--cream); }
+.map-pin:hover .map-pin__label, .map-pin:focus-visible .map-pin__label, .map-pin[aria-expanded="true"] .map-pin__label {
+  opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s;
+}
+
 .hours { padding: clamp(1.5rem, 3vw, 2.25rem); align-self: start; }
 .hours__title { display: flex; align-items: center; gap: 0.5rem; font-family: var(--f-sign); font-weight: 800; text-transform: uppercase; font-size: 1.75rem; line-height: 1; }
-.hours__status { margin: 0.5rem 0 1.25rem; color: var(--cream-2); font-size: 0.95rem; }
+/* Status: a small dot, Kelly when open, brass when closed (matches the nav pill). */
+.hours__status { display: flex; align-items: center; gap: 0.55rem; margin: 0.5rem 0 1.25rem; color: var(--cream-2); font-size: 0.95rem; }
+.hours__status::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--brass); }
 .hours__status.is-open { color: var(--color-accent-soft); }
+.hours__status.is-open::before { background: var(--color-accent-soft); box-shadow: 0 0 0 3px rgba(var(--color-accent-soft-rgb), 0.16); }
 .hours__table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .hours__table th, .hours__table td { padding: 0.7rem 0; border-top: 1px solid var(--cream-line); vertical-align: top; text-align: left; font-size: 0.95rem; }
 .hours__table th { font-weight: 500; color: var(--cream-2); padding-right: 1rem; }
 .hours__table td { text-align: right; }
-.hours__table tr.is-today th, .hours__table tr.is-today td { color: var(--cream); font-weight: 650; }
-.hours__table tr.is-today th { box-shadow: inset 3px 0 0 var(--accent-fg); padding-left: 0.75rem; }
-@media (max-width: 860px) { .visit__grid { grid-template-columns: 1fr; } }
+/* Today: a thin Kelly rule, a faint Kelly wash and brighter type. */
+.hours__table tr.is-today th, .hours__table tr.is-today td { color: var(--cream); font-weight: 600; background: rgba(var(--color-accent-soft-rgb), 0.075); }
+.hours__table tr.is-today th { box-shadow: inset 2px 0 0 var(--color-accent-soft); padding-left: 0.85rem; }
+.hours__table tr.is-today td { padding-right: 0.85rem; }
+
+/* Desktop: address | map | hours as one spread. Below that, one column in reading order:
+   address, actions, map, hours, contact links. */
+@media (min-width: 1100px) {
+  .visit__grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(19rem, 0.82fr); gap: clamp(2rem, 3.4vw, 3.75rem); }
+  .visit__title > span:first-child { text-wrap: balance; }
+}
+@media (max-width: 1099px) {
+  .visit__grid { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  .visit__main { display: contents; }
+  .visit__main > .label { order: 1; }
+  .visit__title { order: 2; }
+  .visit__actions { order: 3; }
+  .visit__map { order: 4; margin-top: 0.75rem; }
+  .visit__map-frame { aspect-ratio: 4 / 3; max-height: 26rem; }
+  .hours { order: 5; }
+  .visit__contact { order: 6; }
+}
 
 /* ---------- footer ---------- */
 .footer { background: var(--tile-ink); color: var(--cream); padding: clamp(4rem, 10vw, 8rem) var(--gutter) 2rem; }

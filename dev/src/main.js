@@ -26,9 +26,24 @@ function initFilm() {
   const sceneStills = $$("[data-film-still]", section);
   const beatStart = 0.16;
 
+  // One player for the whole visit. What the film should do lives in `intent`; everything else is observed:
+  //   intent  "auto"    play whenever the hero is on screen and the tab is visible
+  //           "paused"  the visitor pressed Pause; nothing restarts it but the visitor
+  //           "off"     reduced motion or Save-Data: poster until the visitor presses Play
+  //           "blocked" the player never started after a few requests: poster, and Play is offered
+  // Every lifecycle event (player ready, pause, scroll into/out of view, tab visibility, back/forward restore)
+  // calls reconcile(), which is the only place that asks the player to play or pause. The poster only gives way
+  // once the film's clock is actually advancing, so a player that loads but never starts can't look frozen.
+  const saveData = Boolean(navigator.connection?.saveData);
+  let intent = reduceMotion || saveData ? "off" : "auto";
   let iframe = null;
   let ready = false;
-  let playing = !reduceMotion;
+  let progressing = false;
+  let lastSeconds = -1;
+  let retries = 0;
+  let watchdog = 0;
+  let seekTimer = 0;
+  let warned = false;
   let inView = true;
   let active = 0;
   let pendingSeek = null;
@@ -39,10 +54,67 @@ function initFilm() {
     iframe.contentWindow.postMessage(JSON.stringify(value === undefined ? { method } : { method, value }), VIMEO_ORIGIN);
   };
 
-  const syncToggle = () => {
-    toggle.classList.toggle("is-paused", !playing);
-    toggle.setAttribute("aria-pressed", String(!playing));
-    toggleLabel.textContent = playing ? "Pause film" : "Play film";
+  const wantsPlayback = () => intent === "auto" && inView && !document.hidden;
+
+  // data-film-state is a non-visual marker for QA: poster | loading | playing | paused | offscreen | hidden | blocked
+  const render = () => {
+    const state =
+      intent === "off" ? "poster" : intent === "blocked" ? "blocked" : intent === "paused" ? "paused"
+        : !inView ? "offscreen" : document.hidden ? "hidden" : progressing ? "playing" : "loading";
+    if (section.dataset.filmState !== state) section.dataset.filmState = state;
+    const on = intent === "auto";
+    toggle.classList.toggle("is-paused", !on);
+    toggle.setAttribute("aria-pressed", String(!on));
+    const label = on ? "Pause film" : "Play film";
+    if (toggleLabel.textContent !== label) toggleLabel.textContent = label;
+  };
+
+  // If a play request doesn't produce a moving clock, ask again twice, then settle on the poster.
+  const armWatchdog = () => {
+    clearTimeout(watchdog);
+    watchdog = setTimeout(() => {
+      if (progressing || !wantsPlayback()) return;
+      if (retries < 2) {
+        retries += 1;
+        post("play");
+        armWatchdog();
+        return;
+      }
+      intent = "blocked";
+      section.classList.remove("has-video");
+      if (!warned) console.warn("Lenny's Casita: the hero film did not start, so the poster stays up.");
+      warned = true;
+      render();
+    }, retries === 0 ? 4000 : 3000);
+  };
+
+  const reconcile = () => {
+    if (iframe && ready) {
+      if (wantsPlayback()) {
+        if (!progressing) {
+          post("play");
+          armWatchdog();
+        }
+      } else {
+        clearTimeout(watchdog);
+        if (intent !== "blocked") post("pause");
+        progressing = false;
+      }
+    }
+    render();
+  };
+
+  const onProgress = () => {
+    if (progressing) return;
+    progressing = true;
+    retries = 0;
+    clearTimeout(watchdog);
+    // A player that starts late still wins: drop back from "blocked" to normal playback.
+    if (intent === "blocked") intent = "auto";
+    section.classList.add("has-video");
+    // Playback can begin just as the visitor pauses or scrolls away; honour that.
+    if (!wantsPlayback()) reconcile();
+    else render();
   };
 
   const loadVideo = ({ controls = false } = {}) => {
@@ -58,15 +130,12 @@ function initFilm() {
     iframe.allow = "autoplay; fullscreen; picture-in-picture";
     iframe.referrerPolicy = "strict-origin-when-cross-origin";
     if (!controls) iframe.tabIndex = -1;
-    listen(iframe, "load", () => {
-      post("addEventListener", "play");
-      post("addEventListener", "timeupdate");
-    });
     holder.appendChild(iframe);
+    render();
   };
 
   listen(window, "message", (event) => {
-    if (event.origin !== VIMEO_ORIGIN || !iframe || event.source !== iframe.contentWindow || ready) return;
+    if (event.origin !== VIMEO_ORIGIN || !iframe || event.source !== iframe.contentWindow) return;
     let data = event.data;
     if (typeof data === "string") {
       try {
@@ -75,24 +144,55 @@ function initFilm() {
         return;
       }
     }
-    if (!["ready", "play", "playing", "timeupdate", "playProgress"].includes(data?.event)) return;
-    ready = true;
-    section.classList.add("has-video");
-    if (pendingSeek !== null) {
-      post("setCurrentTime", pendingSeek);
-      pendingSeek = null;
+    switch (data?.event) {
+      case "ready":
+        // Listeners are registered only once the player says it can take them.
+        ready = true;
+        ["play", "pause", "timeupdate", "error"].forEach((name) => post("addEventListener", name));
+        if (pendingSeek !== null) {
+          post("setCurrentTime", pendingSeek);
+          lastSeconds = -1;
+          pendingSeek = null;
+        }
+        reconcile();
+        break;
+      case "timeupdate":
+      case "playProgress": {
+        // A seek also reports a time, so only two consecutive, slightly later readings count as playback.
+        const seconds = Number(data.data?.seconds);
+        if (!Number.isFinite(seconds)) break;
+        if (lastSeconds >= 0 && seconds > lastSeconds && seconds - lastSeconds < 2) onProgress();
+        lastSeconds = seconds;
+        break;
+      }
+      case "pause":
+        progressing = false;
+        lastSeconds = -1;
+        // The player paused on its own (power saving, autopause) while it should be playing: one bounded recovery.
+        if (wantsPlayback()) armWatchdog();
+        render();
+        break;
+      case "error":
+        if (!progressing && intent === "auto") {
+          retries = 2;
+          armWatchdog();
+        }
+        break;
     }
-    if (!playing || !inView) post("pause");
   });
 
+  // Chapters seek once each, after the scroll settles on one; the film keeps playing from there.
   const seekTo = (i) => {
     const time = Number(beats[i].dataset.time);
+    clearTimeout(seekTimer);
     if (!ready) {
       pendingSeek = time;
       return;
     }
-    post("setCurrentTime", time);
-    if (playing && inView) post("play");
+    seekTimer = setTimeout(() => {
+      lastSeconds = -1;
+      post("setCurrentTime", time);
+    }, 160);
   };
 
   const setActive = (i) => {
@@ -114,16 +214,19 @@ function initFilm() {
   stills[0]?.setAttribute("aria-current", "true");
 
   const startFilm = () => {
-    playing = true;
+    intent = "auto";
+    retries = 0;
     loadVideo({ controls: reduceMotion });
-    syncToggle();
+    reconcile();
   };
 
   listen(toggle, "click", () => {
-    if (!iframe) return startFilm();
-    playing = !playing;
-    post(playing ? "play" : "pause");
-    syncToggle();
+    if (intent === "auto") {
+      intent = "paused";
+      reconcile();
+    } else {
+      startFilm();
+    }
   });
 
   stills.forEach((still, i) =>
@@ -141,12 +244,30 @@ function initFilm() {
     })
   );
 
-  const observer = new IntersectionObserver(([entry]) => {
-    inView = entry.isIntersecting;
-    if (ready) post(inView && playing ? "play" : "pause");
-  });
+  // Pause only once the whole film section (pin spacing included) is well clear of the viewport.
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (inView === entry.isIntersecting) return;
+      inView = entry.isIntersecting;
+      reconcile();
+    },
+    { rootMargin: "25% 0px" }
+  );
   observer.observe(section);
-  onCleanup(() => observer.disconnect());
+  listen(document, "visibilitychange", reconcile);
+  // Back/forward cache restores the page with the player in an unknown state: re-check instead of trusting it.
+  listen(window, "pageshow", (event) => {
+    if (!event.persisted) return;
+    progressing = false;
+    lastSeconds = -1;
+    retries = 0;
+    reconcile();
+  });
+  onCleanup(() => {
+    observer.disconnect();
+    clearTimeout(watchdog);
+    clearTimeout(seekTimer);
+  });
 
   const mm = gsap.matchMedia();
   mm.add(
@@ -216,15 +337,16 @@ function initFilm() {
       .to(words, { yPercent: 0, duration: 1.1, stagger: 0.06 }, 0.15)
       // The script line's glow resolves once the words have settled, then never moves again.
       .call(() => section.classList.add("is-lit"), null, 1.2);
-
-    if (!navigator.connection?.saveData) {
-      const start = () => setTimeout(() => loadVideo(), 300);
-      if (document.readyState === "complete") start();
-      else listen(window, "load", start, { once: true });
-    }
   }
   if (reduceMotion) section.classList.add("is-lit");
-  syncToggle();
+  // The player goes in as soon as the page has loaded — no extra delay on top — but not before, because the film
+  // sits inside the pinned element and ScrollTrigger's first refresh re-parents that subtree (which would reload
+  // the iframe and throw). preconnect to player.vimeo.com in <head> covers the handshake in the meantime.
+  if (intent === "auto") {
+    if (document.readyState === "complete") loadVideo();
+    else listen(window, "load", () => loadVideo(), { once: true });
+  }
+  render();
 }
 
 /* ---------------- plate tour ---------------- */
@@ -688,6 +810,42 @@ function initCultura() {
   });
 }
 
+/* ---------------- Visit: light map ---------------- */
+// The static map image is the section until the live map is close; MapLibre then loads as its own chunk.
+function initVisitMap() {
+  const figure = $("[data-visit-map]");
+  if (!figure) return;
+  figure.dataset.mapState = "idle";
+  if (navigator.connection?.saveData || !("WebGLRenderingContext" in window)) {
+    figure.dataset.mapState = "fallback";
+    return;
+  }
+  let dispose = null;
+  let disposed = false;
+  // ScrollTrigger rather than an IntersectionObserver: it re-measures on every refresh, so the pinned sections
+  // above the Visit block can grow and shrink without the map missing its cue.
+  const trigger = ScrollTrigger.create({
+    trigger: figure,
+    start: "top bottom+=800",
+    once: true,
+    onEnter: () => {
+      import("./visit-map.js")
+        .then(({ mountVisitMap }) => {
+          if (!disposed) dispose = mountVisitMap(figure);
+        })
+        .catch((error) => {
+          figure.dataset.mapState = "fallback";
+          console.warn("Lenny's Casita: live map unavailable, showing the static map.", error);
+        });
+    },
+  });
+  onCleanup(() => {
+    disposed = true;
+    trigger.kill();
+    dispose?.();
+  });
+}
+
 boot(() => {
   // Scenes in page order: the Shabbat Shuk now follows the film directly.
   initFilm();
@@ -697,4 +855,5 @@ boot(() => {
   initPours();
   initBarLight();
   initCultura();
+  initVisitMap();
 });

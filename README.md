@@ -60,6 +60,12 @@ Two ways:
    Owner-supplied photos go through `node scripts/owner-media.mjs <folder>` (WebP + JPEG, no upscaling).
    The trimmed source films live in `dev/public/video/`.
 
+   The Visit section's map style is generated, not hand-written: `node scripts/map-style.mjs` re-reads
+   OpenFreeMap's Positron style and writes the re-coloured `dev/public/map/casita-light.json`. Map tiles,
+   glyphs and sprites are served by OpenFreeMap (no API key; attribution is shown under the map). The static
+   map image in `dev/public/img/visit/` is a screenshot of that same map and is what visitors see if WebGL or
+   the tiles are unavailable — regenerate it if the style or the framing changes.
+
 ## Deploying to GitHub Pages
 
 1. Push this repo to GitHub (see the project's git history for the current remote).
