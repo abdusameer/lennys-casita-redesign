@@ -185,6 +185,9 @@ on a phone the picture sticks while the rows pass under it, and the rows, prices
   already ships, pointed at from the rows with `data-still`.
 - The still and its list sit in their own wrapper, so the picture is released when that list ends instead of
   hanging over the back bar or the closing note.
+- The name rides on the picture. It leaves before the photograph does and arrives with it (160ms out, 340ms in),
+  so the two read as one change rather than a caption snapping under a fading image. The row underneath keeps the
+  name, price and links, so the caption stays decorative.
 - `data-still` is a data attribute, which neither Vite nor the publisher rewrites by default; `reorg.mjs` now
   maps it like any other asset reference (and the leftovers guard covers it, so a future miss fails the build).
 - Desktop keeps its approved layout exactly: no stills, thumbnails intact, the taco rail still pinned. Short

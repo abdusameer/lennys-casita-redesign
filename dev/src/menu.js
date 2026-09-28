@@ -47,6 +47,7 @@ function initChapterStories() {
 
     const figure = document.createElement("figure");
     figure.className = "chapter__still";
+    // Decorative: the row underneath is the real content, and it keeps the name, the price and the links.
     figure.setAttribute("aria-hidden", "true");
     const layers = [document.createElement("img"), document.createElement("img")];
     layers.forEach((layer) => {
@@ -54,6 +55,25 @@ function initChapterStories() {
       layer.alt = "";
       figure.appendChild(layer);
     });
+    const caption = document.createElement("figcaption");
+    caption.className = "chapter__still-cap";
+    const nameEl = document.createElement("span");
+    nameEl.className = "chapter__still-name";
+    const priceEl = document.createElement("span");
+    priceEl.className = "chapter__still-price";
+    caption.append(nameEl, priceEl);
+    figure.appendChild(caption);
+
+    // The name of the row the picture is showing. Drinks carry their own name and price; the Shuk rows put the
+    // name in the first span with the description in a <small>, so take the row's own text and leave that out.
+    const labelOf = (li) => {
+      const nameNode = $(".drink__name", li) || $("span", li);
+      const priceNode = $(".drink__price", li) || li.querySelector("span:last-child");
+      const name = nameNode
+        ? [...nameNode.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE).map((node) => node.textContent).join(" ").replace(/\s+/g, " ").trim() || nameNode.textContent.trim()
+        : "";
+      return { name, price: priceNode ? priceNode.textContent.replace(/\s+/g, " ").trim() : "" };
+    };
 
     // The still and its list live in their own wrapper, so the picture is released the moment the list ends
     // instead of hanging around over whatever follows it in the chapter (the back bar, the closing note).
@@ -67,23 +87,37 @@ function initChapterStories() {
       wrap.append(figure, list);
       let active = -1;
       let front = 0;
-      const show = (i) => {
+      const show = (i, immediate = false) => {
         if (i === active) return;
         active = i;
         items.forEach((li, n) => li.classList.toggle("is-active", n === i));
+        const { name, price } = labelOf(items[i]);
+        const writeCaption = () => {
+          nameEl.textContent = name;
+          priceEl.textContent = price;
+          gsap.to(caption, { autoAlpha: 1, y: 0, duration: immediate ? 0 : 0.34, ease: "power3.out", overwrite: true });
+        };
+        // The name leaves before the picture does and arrives with it, so the two read as one change.
+        if (immediate) writeCaption();
+        else gsap.to(caption, { autoAlpha: 0, y: 8, duration: 0.16, ease: "power2.in", overwrite: true });
+
         const next = layers[front ? 0 : 1];
         const src = stillOf(items[i]);
-        if (!src || next.getAttribute("src") === src) return;
+        if (!src || next.getAttribute("src") === src) {
+          if (!immediate) writeCaption();
+          return;
+        }
         next.src = src;
         const reveal = () => {
           next.classList.add("is-on");
           layers[front].classList.remove("is-on");
           front = front ? 0 : 1;
+          if (!immediate) writeCaption();
         };
         if (next.complete) reveal();
         else next.addEventListener("load", reveal, { once: true });
       };
-      show(0);
+      show(0, true);
       const trigger = ScrollTrigger.create({
         trigger: list,
         start: "top 58%",
@@ -98,6 +132,7 @@ function initChapterStories() {
         section.classList.remove("has-chapter-story");
         items.forEach((li) => li.classList.remove("is-active"));
         layers.forEach((layer) => layer.classList.remove("is-on"));
+        gsap.set(caption, { clearProps: "all" });
         active = -1;
       };
     });
