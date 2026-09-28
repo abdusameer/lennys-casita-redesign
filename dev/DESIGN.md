@@ -176,6 +176,20 @@ scroll had no story in it — the Shuk was five full-height photos in a row and 
   children once it becomes a column.
 - Short screens (a landscape handset, under 600px tall) and reduced motion keep the plain stack.
 
+## Menu page: phone chapter stories
+The menu's long chapters are lists to scan, so the story here sits beside the content rather than replacing it:
+on a phone the picture sticks while the rows pass under it, and the rows, prices and links are untouched.
+
+- **Drinks** uses each cocktail's own photograph, so no new assets: the still swaps as you reach each drink and
+  the per-row thumbnails step aside while it does. **Shabbat** reuses the five Shuk photographs the home page
+  already ships, pointed at from the rows with `data-still`.
+- The still and its list sit in their own wrapper, so the picture is released when that list ends instead of
+  hanging over the back bar or the closing note.
+- `data-still` is a data attribute, which neither Vite nor the publisher rewrites by default; `reorg.mjs` now
+  maps it like any other asset reference (and the leftovers guard covers it, so a future miss fails the build).
+- Desktop keeps its approved layout exactly: no stills, thumbnails intact, the taco rail still pinned. Short
+  screens and reduced motion keep the plain list.
+
 ## Visit: the light map
 A light editorial map is the one bright surface in the deep-agave Visit section — address left, map centre, hours right on
 wide screens; address, actions, map, hours, contact links in one column below 1100px.

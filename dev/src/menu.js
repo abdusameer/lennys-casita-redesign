@@ -32,6 +32,79 @@ function initTacoRail() {
   onCleanup(() => mm.revert());
 }
 
+/* ---------------- phone chapter stories ---------------- */
+// Long menu chapters read as one list to scan through. On a phone the picture sticks while the rows pass under
+// it: the dish or the glass you are reading about is always on screen. The rows, prices and links are untouched,
+// so the chapter still works as a menu. Desktop keeps its approved layout; short screens keep the plain list.
+const PHONE_STORY = "(max-width: 899px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)";
+
+function initChapterStories() {
+  $$("[data-story-list]").forEach((list) => {
+    const items = $$(":scope > li", list);
+    const stillOf = (li) => li.dataset.still || $("img", li)?.getAttribute("src");
+    if (items.length < 3 || !stillOf(items[0])) return;
+    const section = list.closest("section");
+
+    const figure = document.createElement("figure");
+    figure.className = "chapter__still";
+    figure.setAttribute("aria-hidden", "true");
+    const layers = [document.createElement("img"), document.createElement("img")];
+    layers.forEach((layer) => {
+      layer.decoding = "async";
+      layer.alt = "";
+      figure.appendChild(layer);
+    });
+
+    // The still and its list live in their own wrapper, so the picture is released the moment the list ends
+    // instead of hanging around over whatever follows it in the chapter (the back bar, the closing note).
+    const wrap = document.createElement("div");
+    wrap.className = "chapter__story";
+
+    const mm = gsap.matchMedia();
+    mm.add(PHONE_STORY, () => {
+      section.classList.add("has-chapter-story");
+      list.before(wrap);
+      wrap.append(figure, list);
+      let active = -1;
+      let front = 0;
+      const show = (i) => {
+        if (i === active) return;
+        active = i;
+        items.forEach((li, n) => li.classList.toggle("is-active", n === i));
+        const next = layers[front ? 0 : 1];
+        const src = stillOf(items[i]);
+        if (!src || next.getAttribute("src") === src) return;
+        next.src = src;
+        const reveal = () => {
+          next.classList.add("is-on");
+          layers[front].classList.remove("is-on");
+          front = front ? 0 : 1;
+        };
+        if (next.complete) reveal();
+        else next.addEventListener("load", reveal, { once: true });
+      };
+      show(0);
+      const trigger = ScrollTrigger.create({
+        trigger: list,
+        start: "top 58%",
+        end: "bottom 55%",
+        onUpdate: (self) => show(Math.min(items.length - 1, Math.floor(self.progress * items.length))),
+      });
+      return () => {
+        trigger.kill();
+        wrap.before(list);
+        figure.remove();
+        wrap.remove();
+        section.classList.remove("has-chapter-story");
+        items.forEach((li) => li.classList.remove("is-active"));
+        layers.forEach((layer) => layer.classList.remove("is-on"));
+        active = -1;
+      };
+    });
+    onCleanup(() => mm.revert());
+  });
+}
+
 /* ---------------- chapter rail: where am I on the menu ---------------- */
 function initRail() {
   const rail = $("[data-rail]");
@@ -116,6 +189,7 @@ function initDetails() {
 
 boot(() => {
   initTacoRail();
+  initChapterStories();
   initRail();
   initFusion();
   initBuilder();

@@ -69,12 +69,18 @@ function publishPage(distFile, outFile, pageCss) {
     copy(join(dist, "video", file), join(out, "video", file));
     return `assets/video/${file}`;
   });
+  // Data attributes Vite leaves alone: the chapter stills the menu page swaps in as you scroll.
+  html = html.replace(/data-still="\/?(?:\.\/)?img\/([A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)*)"/g, (_, rel) => {
+    const dest = imageDest(rel);
+    copy(join(dist, "img", rel), join(out, "images", dest));
+    return `data-still="assets/images/${dest}"`;
+  });
   html = html.replace(/data-map-style="(?:\.\/)?map\/([A-Za-z0-9_.-]+\.json)"/g, (_, file) => {
     copy(join(dist, "map", file), join(out, "map", file));
     return `data-map-style="assets/map/${file}"`;
   });
 
-  const leftovers = html.match(/(?:src|srcset|href|poster)="(?:\.\/)?(?:img|video)\/|\.\/assets\/[^"/]+\.(?:js|css)"|href="menu\.html/g);
+  const leftovers = html.match(/(?:src|srcset|href|poster|data-still)="\/?(?:\.\/)?(?:img|video)\/|\.\/assets\/[^"/]+\.(?:js|css)"|href="menu\.html/g);
   if (leftovers) throw new Error(`Unrewritten reference(s) in ${outFile}: ${leftovers.slice(0, 5).join(", ")}`);
   writeFileSync(join(root, outFile), html);
   console.log(`wrote ${outFile} (${(Buffer.byteLength(html) / 1024).toFixed(1)} KB)`);

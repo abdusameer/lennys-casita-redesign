@@ -311,3 +311,30 @@ html:not(.nav-hidden) .rail { top: var(--nav-h); }
   .rail__progress { top: 0.9rem; bottom: 0.9rem; left: auto; right: -1px; width: 2px; height: auto; }
   .rail__progress span { transform-origin: top; transform: scaleY(var(--p, 0)); }
 }
+
+
+/* ============================================================
+   PHONE CHAPTER STORIES (menu)
+   The long chapters read as one list to scan. On a phone the dish or the glass now sticks while its rows pass
+   under it, the way the chapters on the home page read. Desktop keeps the approved layout untouched.
+   ============================================================ */
+@media (max-width: 899px) {
+  /* The wrapper bounds the sticky still: it lets go when its own list ends. */
+  .chapter__story { position: relative; }
+  .chapter__still {
+    position: sticky; top: calc(var(--nav-h) + 0.4rem); z-index: 2;
+    margin: 0 0 1.1rem; height: 32svh; min-height: 13rem;
+    overflow: hidden; border-radius: 10px; background: var(--tile-ink);
+  }
+  .chapter__still img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.5s var(--ease); }
+  .chapter__still img.is-on { opacity: 1; }
+  /* The sticky still carries the picture, so the per-row thumbnails would only repeat it. */
+  .has-chapter-story .drink__img { display: none; }
+  .has-chapter-story .drink { grid-template-columns: minmax(0, 1fr) auto; }
+  /* Room to read one row at a time on the way past, and a Kelly mark on the row the picture is showing. */
+  .has-chapter-story .drinks > li, .has-chapter-story .price-list > li { align-content: center; padding-left: 0.85rem; box-shadow: inset 2px 0 0 transparent; transition: box-shadow 0.35s var(--ease); }
+  .has-chapter-story .drinks > li { min-height: 14svh; }
+  /* The Shuk rows are a line or two each; they need pacing, not a screenful of empty tile. */
+  .has-chapter-story .price-list > li { min-height: 10svh; }
+  .has-chapter-story .drinks > li.is-active, .has-chapter-story .price-list > li.is-active { box-shadow: inset 2px 0 0 var(--color-accent-soft); }
+}
