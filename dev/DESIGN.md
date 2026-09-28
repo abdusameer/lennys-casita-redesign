@@ -168,6 +168,12 @@ scroll had no story in it — the Shuk was five full-height photos in a row and 
   carry the position, and the bottom of the screen belongs to the Order/Reserve bar.
 - Film beats reserved 55svh each and sat at the top of that space, leaving a long empty stretch under every line;
   they are now 44svh with the text centred.
+- The counter joins them: the plate sticks (square on a phone, with its arrows and 01/06) while the six rows pass
+  under it, driving the same WebGL tile flip the pinned desktop tour uses. The rows stay tappable and the arrows
+  still jump, because the phone trigger is assigned to the same `pin` the desktop scene uses.
+- Two sticky traps worth remembering: a sticky grid item is held inside its own row, which is exactly its own
+  height (so both scenes use a block or flex parent), and `align-items: center` on that parent shrink-wraps the
+  children once it becomes a column.
 - Short screens (a landscape handset, under 600px tall) and reduced motion keep the plain stack.
 
 ## Visit: the light map

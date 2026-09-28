@@ -429,6 +429,24 @@ html.motion:not(.motion-ready) [data-film-split] { opacity: 0; animation: lc-sho
   .shuk.is-story-sm .dish__price { grid-column: 2; grid-row: 1; margin-top: 0; font-size: 1.5rem; }
   .shuk.is-story-sm .dish__desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
+  /* The counter: the plate holds the screen while the six rows scroll past it, the way the pinned tour reads on
+     a desktop. Flex, not grid: a sticky grid item is held inside its own row, which is exactly its own height. */
+  /* align-items on the base rule centres on the cross axis once this is a column, which shrink-wraps both
+     children to their content width; stretch keeps the plate and the rows full width. */
+  .counter.is-story-sm .counter__pin { display: flex; flex-direction: column; align-items: stretch; }
+  .counter.is-story-sm .counter__stage {
+    order: -1; position: sticky; top: var(--nav-h); z-index: 2;
+    /* Opaque: the plate list passes behind this band, not through it. */
+    background: var(--tile-ink); padding: 0.7rem 0 0.9rem;
+  }
+  /* Square on a phone: 4/5 plus the controls would eat most of the screen and leave no room to read the rows. */
+  .counter.is-story-sm .counter__frame { aspect-ratio: 1 / 1; }
+  .counter.is-story-sm .counter__text { margin-top: 0.25rem; }
+  /* Room to read one plate at a time on the way past. */
+  .counter.is-story-sm .plate { min-height: 24svh; display: grid; align-content: center; }
+  .counter.is-story-sm .plate__desc { opacity: 0.55; transition: opacity 0.4s var(--ease); }
+  .counter.is-story-sm .plate.is-active .plate__desc { opacity: 1; }
+
   /* After dark: one cocktail at a time instead of six tall cards in a row. */
   .pours.is-story-sm .pours__stage { min-height: calc(var(--chapters, 6) * 62svh); }
   .pours.is-story-sm .pours__list {

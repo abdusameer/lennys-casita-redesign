@@ -465,6 +465,22 @@ function initCounter() {
       gl?.set(active, active, 0);
     };
   });
+  mm.add(PHONE_STORY, () => {
+    // Phones read the same tour: the plate sticks while the six rows pass under it. Assigning the trigger to `pin`
+    // means the rows, the arrows and the keyboard all keep working exactly as they do on a desktop.
+    section.classList.add("is-story-sm");
+    pin = ScrollTrigger.create({
+      trigger: $("[data-plates]", section),
+      start: "top 62%",
+      end: "bottom 58%",
+      onUpdate: (self) => renderFromPin(self.progress),
+    });
+    return () => {
+      section.classList.remove("is-story-sm");
+      pin = null;
+      gl?.set(active, active, 0);
+    };
+  });
   onCleanup(() => {
     tween?.kill();
     mm.revert();
