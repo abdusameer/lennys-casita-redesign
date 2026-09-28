@@ -581,7 +581,31 @@ function initPours() {
       active = -1;
     };
   });
-  mm.add("(max-width: 899px) and (prefers-reduced-motion: no-preference)", () => {
+  mm.add(PHONE_STORY, () => {
+    // One pour at a time on phones too: the glass holds the screen, the name and price change beneath it.
+    section.classList.add("is-story-sm");
+    section.style.setProperty("--chapters", String(pours.length));
+    active = -1;
+    show(0, true);
+    ScrollTrigger.create({
+      trigger: stage,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        show(Math.min(pours.length - 1, Math.floor(self.progress * pours.length)));
+        bar.style.transform = `scaleX(${self.progress.toFixed(4)})`;
+      },
+    });
+    return () => {
+      section.classList.remove("is-story-sm");
+      section.style.removeProperty("--chapters");
+      pours.forEach((pour) => pour.classList.remove("is-active"));
+      gsap.set([stage, ...pours.flatMap((pour) => [partsOf(pour).photo, ...partsOf(pour).copy])], { clearProps: "all" });
+      active = -1;
+    };
+  });
+  // Landscape handsets and very short screens: the plain list, revealed as it arrives.
+  mm.add("(max-width: 899px) and (max-height: 599px) and (prefers-reduced-motion: no-preference)", () => {
     pours.forEach((pour) =>
       gsap.from(pour, { opacity: 0, y: 32, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: pour, start: "top 88%", once: true } })
     );
@@ -724,6 +748,9 @@ function initBarLight() {
 // stick until the section ends, so the release is plain native scroll. It only anchors when its copy fits the
 // screen; on shorter screens it stays in normal flow.
 const ANCHOR_QUERY = "(min-width: 901px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)";
+// Phones tell the same chapters with CSS sticky instead of a pin: the media holds the screen while the copy
+// advances under it. Short phones (a landscape handset) and reduced motion keep the plain stack.
+const PHONE_STORY = "(max-width: 899px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)";
 
 function anchorWhenItFits(section, sticky, content, className) {
   const check = () => {
@@ -764,7 +791,7 @@ function initShuk() {
 
   rail.forEach((button, i) =>
     listen(button, "click", () => {
-      if (!trigger || !section.classList.contains("is-story")) return;
+      if (!trigger || !(section.classList.contains("is-story") || section.classList.contains("is-story-sm"))) return;
       scrollToY(trigger.start + ((i + 0.5) / count) * (trigger.end - trigger.start));
     })
   );
@@ -780,6 +807,25 @@ function initShuk() {
     });
     return () => {
       release();
+      trigger = null;
+    };
+  });
+  mm.add(PHONE_STORY, () => {
+    // The order panel reads first; then the dish photo sticks and the five dishes change under it.
+    section.style.setProperty("--chapters", String(count));
+    section.classList.add("is-story-sm");
+    setActive(0);
+    dishes[0].classList.add("is-active");
+    trigger = ScrollTrigger.create({
+      trigger: $(".shuk__grid", section),
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => setActive(Math.min(count - 1, Math.floor(self.progress * count))),
+    });
+    return () => {
+      section.classList.remove("is-story-sm");
+      section.style.removeProperty("--chapters");
+      dishes.forEach((dish) => dish.classList.remove("is-active"));
       trigger = null;
     };
   });

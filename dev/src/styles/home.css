@@ -384,3 +384,73 @@ html.motion:not(.motion-ready) [data-film-split] { opacity: 0; animation: lc-sho
 @media (max-width: 760px) {
   .footer { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
 }
+
+/* ============================================================
+   PHONE CHAPTER STORIES
+   Desktop holds these chapters on screen while they advance. Phones used to get a plain stack, which reads as a
+   very long scroll with no story in it. Same idea here, without pinning: the media sticks while the copy changes
+   under it, so the scroll still tells the chapter. Short phones and reduced motion keep the plain stack.
+   ============================================================ */
+@media (max-width: 899px) {
+  /* Film: the beats reserved 55svh each and sat at the top of it, leaving a long empty stretch under every line. */
+  .film.is-sticky .beat { min-height: 44svh; display: flex; flex-direction: column; justify-content: center; }
+
+  /* Shabbat Shuk: the panel reads first, then one dish photo holds the screen while the five dishes advance. */
+  /* The scroll room has to be real content height: a sticky element is held inside its parent's content box,
+     so padding under it buys nothing. The photo sticks; its parent is tall enough for five chapters. */
+  .shuk.is-story-sm .shuk__grid { display: block; }
+  .shuk.is-story-sm .shuk__panel { margin-bottom: clamp(2rem, 6vw, 3rem); }
+  .shuk.is-story-sm .shuk__hits { min-height: calc(var(--chapters, 5) * 62svh); }
+  .shuk.is-story-sm .dishes { position: sticky; top: calc(var(--nav-h) + 0.6rem); }
+  /* The chapter number on the photo is the progress marker on a phone; the rail is a pointer affordance. */
+  .shuk.is-story-sm .shuk__count, .shuk.is-story-sm .shuk__rail { display: none; }
+  .shuk.is-story-sm .dishes {
+    display: block; counter-reset: dish;
+    height: calc(100svh - var(--nav-h) - 8.5rem); min-height: 21rem;
+  }
+  .shuk.is-story-sm .dish {
+    position: absolute; inset: 0; counter-increment: dish;
+    grid-template-rows: minmax(0, 1fr) auto; gap: 0;
+    opacity: 0; transition: opacity 0.45s var(--ease);
+  }
+  .shuk.is-story-sm .dish.is-active { opacity: 1; transition-duration: 0.8s; }
+  .shuk.is-story-sm .dish__photo { min-height: 0; }
+  .shuk.is-story-sm .dish__photo img { height: 100%; aspect-ratio: auto; }
+  .shuk.is-story-sm .dish__num { display: none; }
+  .shuk.is-story-sm .dish__photo::before {
+    content: counter(dish, decimal-leading-zero);
+    content: counter(dish, decimal-leading-zero) / "";
+    position: absolute; top: 0.6rem; left: 0.6rem; z-index: 1;
+    padding: 0.3rem 0.55rem 0.1rem; border-radius: 4px; background: rgba(8, 37, 23, 0.78);
+    font-family: var(--f-sign); font-size: 2rem; line-height: 1; letter-spacing: 0.02em; color: var(--color-accent-soft);
+  }
+  .shuk.is-story-sm .dish__copy { margin-top: 0.8rem; padding-top: 0.7rem; }
+  .shuk.is-story-sm .dish__name { font-size: 1.9rem; }
+  .shuk.is-story-sm .dish__price { grid-column: 2; grid-row: 1; margin-top: 0; font-size: 1.5rem; }
+  .shuk.is-story-sm .dish__desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* After dark: one cocktail at a time instead of six tall cards in a row. */
+  .pours.is-story-sm .pours__stage { min-height: calc(var(--chapters, 6) * 62svh); }
+  .pours.is-story-sm .pours__list {
+    position: sticky; top: var(--nav-h); height: calc(100svh - var(--nav-h));
+    display: block; max-width: none; padding: 0;
+  }
+  .pours.is-story-sm .pour {
+    position: absolute; inset: 0.6rem var(--gutter) calc(6rem + env(safe-area-inset-bottom)); margin: 0; padding: 0;
+    border-radius: 0; background: none; opacity: 0; pointer-events: none;
+    display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 0.75rem;
+  }
+  .pours.is-story-sm .pour.is-active { opacity: 1; pointer-events: auto; }
+  .pours.is-story-sm .pour__photo { min-height: 0; height: 100%; max-width: none; }
+  /* Contain, not cover: the whole glass stays in frame and cannot spill under the first line of copy. */
+  .pours.is-story-sm .pour__photo img { height: 100%; width: 100%; object-fit: contain; aspect-ratio: auto; }
+  .pours.is-story-sm .pour__name { margin: 0.3rem 0 0.4rem; font-size: clamp(2rem, 8.5vw, 2.9rem); }
+  .pours.is-story-sm .pour__story {
+    margin-top: 0.45rem; font-size: 1rem; line-height: 1.32;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .pours.is-story-sm .pour__meta { margin-top: 0.6rem; }
+  .pours.is-story-sm .pour__price { font-size: 1.9rem; }
+  /* The Order/Reserve bar owns the bottom of a phone screen, and each pour already carries "02 / 06". */
+  .pours.is-story-sm .pours__hud { display: none; }
+}

@@ -155,6 +155,21 @@ change; what changed is *when* the expensive work happens.
 - The pointer light snaps once the remainder drops below a pixel, instead of easing invisibly for another second.
 - The tile wall ships an 800px source alongside the 1600px one; it is decoded three times per page.
 
+## Phone chapter stories
+Desktop holds a chapter on screen while it advances; phones used to get the same content as a plain stack, so the
+scroll had no story in it — the Shuk was five full-height photos in a row and the bar was six tall cards.
+
+- Both now use CSS sticky rather than a pin: the media holds the screen while the copy changes under it. The Shuk's
+  order panel reads first, then one dish photo sticks and the five dishes cross-fade, each marked with its chapter
+  number. After dark, one cocktail at a time holds the screen with its own mood colour behind it.
+- The scroll room is real content height on the parent (`min-height`), not padding: a sticky element is held inside
+  its parent's *content* box, so padding under it buys no travel at all.
+- The rail and the HUD stay desktop affordances. On a phone the chapter number on the photo and the `02 / 06` line
+  carry the position, and the bottom of the screen belongs to the Order/Reserve bar.
+- Film beats reserved 55svh each and sat at the top of that space, leaving a long empty stretch under every line;
+  they are now 44svh with the text centred.
+- Short screens (a landscape handset, under 600px tall) and reduced motion keep the plain stack.
+
 ## Visit: the light map
 A light editorial map is the one bright surface in the deep-agave Visit section — address left, map centre, hours right on
 wide screens; address, actions, map, hours, contact links in one column below 1100px.
